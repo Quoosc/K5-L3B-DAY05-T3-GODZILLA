@@ -13,11 +13,11 @@ Bài thiết kế và prototype cho tính năng **Đặt chỗ của tôi** khi 
 - [Tài liệu bổ trợ cho buổi luyện](individual/)
 
 1. Mở `prototype/index.html` trực tiếp bằng trình duyệt. Ca mặc định là **S1**: khách đã nói “Ừ đổi đi, hai mẹ con nhé” nhưng chưa chọn chuyến cụ thể.
-2. Chọn **BM 201**. Kiểm tra màn hình hiển thị đúng chuyến, hai hành khách, bộ đếm 20 phút và cảnh báo sẽ dùng lần đổi miễn phí duy nhất. Thử **Đổi lựa chọn** hoặc **Huỷ giữ chỗ**. Có thể bấm **Giả lập hết hạn** để kiểm tra không còn nút xác nhận.
-3. Chọn lại chuyến rồi bấm **Xác nhận đổi cho cả hai**. Nếu bấm **Báo đổi nhầm · Chuyển nhân viên**, bản mẫu hiển thị phiếu ghi chuyến đã đổi và lần miễn phí đã dùng, không tự đổi lần nữa. Kiểm tra cột quyền lợi cũng đã cập nhật.
-4. Mở **Ca khác: Hoàn đã gửi** để thử **S2**. Kiểm tra cảnh báo không thể huỷ yêu cầu hoàn đã gửi và bấm **Chuyển nhân viên** để thấy phiếu có mã đặt chỗ cùng trạng thái yêu cầu.
+2. Bấm **Chọn và giữ BM 201**. Kiểm tra mã chuyến, hai hành khách, bộ đếm 20 phút và cảnh báo về lần đổi miễn phí. Thử **Chọn chuyến khác (nhả chỗ đang giữ)** hoặc **Huỷ giữ chỗ, chưa đổi vé**. Nút **Giả lập hết 20 phút giữ chỗ** cho thấy quyền xác nhận biến mất.
+3. Chọn lại chuyến rồi bấm **Xác nhận đổi vé sang BM 201 cho cả hai**. Bấm **Báo đổi nhầm BM 201 cho nhân viên** để xem phiếu ghi chuyến đã đổi và lần miễn phí đã dùng. Cột quyền lợi cũng được cập nhật.
+4. Bấm **S2 · Hoàn đã gửi**. Kiểm tra cảnh báo không thể huỷ yêu cầu hoàn, rồi bấm **Chuyển nhân viên kiểm tra yêu cầu hoàn** để xem phiếu có mã đặt chỗ và trạng thái yêu cầu.
 
-**Thử thêm trong cùng giao diện:** dùng mục **Tình huống demo** để chọn S3–S11. S4 cho thấy BM 217 bị khoá vì chỉ còn một chỗ; sau khi giữ BM 201 hoặc BM 205 có thể bấm **Giả lập chuyến vừa hết chỗ** để xem trợ lý huỷ xác nhận cũ và yêu cầu chọn lại. S6/S8/S9 chỉ cho chuyển hỗ trợ khi thiếu dữ kiện hoặc quyền; S10 không bỏ qua xác nhận; S11 cho thấy phiếu khi khách báo đổi nhầm. Các nhánh dùng dữ liệu và lời thoại dựng sẵn, không nhận câu hỏi tự do.
+**Thử thêm trong cùng giao diện:** dùng mục **Tình huống demo** để chọn S3–S11. S4 cho thấy nút **Không thể giữ BM 217** bị khoá vì chỉ còn một chỗ. Sau khi giữ BM 201, bấm **Giả lập BM 201 vừa hết chỗ** để xem trợ lý huỷ xác nhận cũ và yêu cầu chọn lại. S6/S8/S9 có nút chuyển nhân viên nêu rõ lý do; S10 không bỏ qua xác nhận; S11 có nút báo đổi nhầm BM 205. Các nhánh dùng dữ liệu và lời thoại dựng sẵn, không nhận câu hỏi tự do.
 
 Prototype chạy bằng HTML, CSS và JavaScript, với dữ liệu dựng của track T3. Giữ chỗ, đổi vé và tạo phiếu hỗ trợ đều là mô phỏng. Có thể mở file trực tiếp, không cần tài khoản, máy chủ hay API key.
 

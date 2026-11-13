@@ -8,8 +8,8 @@
 
 Prototype và hai ảnh đã có. Đọc [spec.md §5–§6](../spec.md) và [hướng dẫn luyện demo](../README.md), rồi mở [prototype](../prototype/index.html) bằng trình duyệt để chạy lại theo thứ tự trình bày.
 
-1. Ở **S1**, chỉ [1] hỏi lại vì khách chưa chọn chuyến và [2] BM 217 chỉ còn một chỗ. Chọn BM 201 rồi chỉ [3] giữ tạm, nút huỷ và nút xác nhận. Bấm **Huỷ giữ chỗ** hoặc **Giả lập hết hạn** để kiểm tra nút xác nhận biến mất. Chọn lại và xác nhận cho cả hai. [Ảnh S1](../prototype/01-clarify.png)
-2. Mở **Ca khác: Hoàn đã gửi**. Chỉ [4] cảnh báo không thể huỷ yêu cầu hoàn đã gửi. Bấm **Chuyển nhân viên** và kiểm tra mã đặt chỗ cùng trạng thái hoàn trong phiếu. [Ảnh S2](../prototype/02-refund.png)
+1. Ở **S1**, chỉ [1] hỏi lại vì khách chưa chọn chuyến và [2] BM 217 chỉ còn một chỗ. Bấm **Chọn và giữ BM 201** rồi chỉ [3] giữ tạm, nút huỷ và nút xác nhận. Bấm **Huỷ giữ chỗ, chưa đổi vé** hoặc **Giả lập hết 20 phút giữ chỗ** để kiểm tra nút xác nhận biến mất. Chọn lại và xác nhận cho cả hai. [Ảnh S1](../prototype/01-clarify.png)
+2. Mở **S2 · Hoàn đã gửi**. Chỉ [4] cảnh báo không thể huỷ yêu cầu hoàn đã gửi. Bấm **Chuyển nhân viên kiểm tra yêu cầu hoàn** và kiểm tra mã đặt chỗ cùng trạng thái hoàn trong phiếu. [Ảnh S2](../prototype/02-refund.png)
 3. Trình bày kết quả **P1–P3** ở §6; chỉ quyền lợi sau đổi và sự khác nhau của phiếu chuyển trước/sau đổi để chứng minh prototype làm đúng chính sách năm tool.
 
 **Ý chính để trình bày:** cho người xem thấy khác biệt giữa chọn chuyến, giữ chỗ tạm và xác nhận đổi. Nếu ca lạ nằm ngoài hai màn hình đã dựng, giải thích trợ lý được làm gì theo §4 và bước tiếp theo mà khách sẽ thấy.
@@ -28,7 +28,7 @@ Các kết quả bên dưới là kết quả kiểm tra của bản prototype h
 
 **Lời thoại luyện demo:** “Ở [1], khách chưa nói rõ chuyến nào. [2] giải thích vì sao chỉ có hai lựa chọn đủ chỗ. Khi tôi chọn BM 201, [3] cho thấy chỗ đang được giữ và có thể huỷ. Tôi thử hết hạn để thấy nút đổi biến mất, rồi chọn lại và xác nhận cho cả hai. Sau khi xác nhận, quyền lợi ghi đã dùng lần miễn phí. Nếu đổi nhầm, tôi bấm chuyển nhân viên và chỉ thông tin chuyến đã đổi trong phiếu. Ở ca hoàn đã gửi, [4] cho biết yêu cầu không thể huỷ sau khi gửi.”
 
-**Ca luyện:** Nếu khách muốn đổi sang BM 205 sau khi đã giữ BM 201, bấm **Đổi lựa chọn**, chọn BM 205 và kiểm tra màn hình duyệt ghi đúng chuyến mới. Khi thao tác đổi đã hoàn tất, dùng đường báo đổi nhầm để chuyển người. [Prototype](../prototype/index.html)
+**Ca luyện:** Nếu khách muốn đổi sang BM 205 sau khi đã giữ BM 201, bấm **Chọn chuyến khác (nhả chỗ đang giữ)**, rồi **Chọn và giữ BM 205**; kiểm tra màn hình duyệt ghi đúng chuyến mới. Khi thao tác đổi đã hoàn tất, dùng nút báo đổi nhầm tương ứng để chuyển người. [Prototype](../prototype/index.html)
 
 ## Bằng chứng cho phần trình bày
 

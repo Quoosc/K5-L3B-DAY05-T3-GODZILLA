@@ -13,7 +13,7 @@
 <body>
   <header><strong>Đặt chỗ của tôi</strong> · Hỗ trợ khi chuyến bị huỷ</header>
   <main class="wrap">
-    <div class="top"><div><h1>Đặt chỗ TRV-7Q2K</h1><p>Hà Nội → TP.HCM · Dữ liệu dựng cho Lab 5</p></div><div class="tabs"><button id="tab-change" class="active">Ca đổi chuyến</button><button id="tab-refund">Ca khác: Hoàn đã gửi</button></div></div>
+    <div class="top"><div><h1>Đặt chỗ TRV-7Q2K</h1><p>Hà Nội → TP.HCM · Dữ liệu dựng cho Lab 5</p></div><div class="tabs"><button id="tab-change" class="active">S1 · Đổi chuyến chưa rõ</button><button id="tab-refund">S2 · Hoàn đã gửi</button></div></div>
     <div class="scenario-picker"><label for="scenario">Tình huống demo</label><select id="scenario" aria-label="Chọn tình huống demo">
       <option value="S1">S1 · “Ừ đổi đi, hai mẹ con nhé”</option><option value="S2">S2 · Hoàn đã gửi, muốn đổi chuyến</option>
       <option value="S3">S3 · Hỏi giờ chuyến đã huỷ</option><option value="S4">S4 · Chọn chuyến 21:00 chỉ còn một chỗ</option>
@@ -101,17 +101,18 @@
       const content=el('main-content'),actions=el('actions');content.replaceChildren();actions.replaceChildren();
       if(refund){
         el('main-title').textContent='Yêu cầu hoàn đã gửi';el('status').textContent=state.step==='transfer'?'Đã chuyển nhân viên · Mô phỏng':'Không thể huỷ yêu cầu hoàn';el('status').className='status red';
-        el('message').textContent=state.step==='transfer'?'Đã tạo phiếu hỗ trợ cho đặt chỗ TRV-7Q2K. Yêu cầu hoàn vẫn ở trạng thái đã gửi.':'Yêu cầu hoàn của đặt chỗ TRV-7Q2K đã được gửi và không thể huỷ. Mình chưa có thông tin xác nhận vé còn đổi được. Bấm “Chuyển nhân viên” để kiểm tra tình trạng vé và các phương án còn lại. Bạn không cần gửi thêm yêu cầu hoàn.';
+        el('message').textContent=state.step==='transfer'?'Đã tạo phiếu hỗ trợ cho đặt chỗ TRV-7Q2K. Yêu cầu hoàn vẫn ở trạng thái đã gửi.':'Yêu cầu hoàn của đặt chỗ TRV-7Q2K đã được gửi và không thể huỷ. Mình chưa có thông tin xác nhận vé còn đổi được. Bấm “Chuyển nhân viên kiểm tra yêu cầu hoàn” để xem tình trạng vé và các phương án còn lại. Bạn không cần gửi thêm yêu cầu hoàn.';
         content.innerHTML='<div class="alert"><span class="marker">4</span>Yêu cầu hoàn đã gửi lúc 15:10 ngày 12/11. Gửi rồi không huỷ được. Nhân viên sẽ kiểm tra trạng thái xử lý, không huỷ yêu cầu đã gửi.</div>';
         if(state.step==='transfer'){content.innerHTML+='<div class="notice">Đã tạo phiếu hỗ trợ mô phỏng. Nhân viên nhận mã TRV-7Q2K, trạng thái hoàn đã gửi và yêu cầu kiểm tra khả năng đổi chuyến. Chưa có thời gian xử lý được xác nhận.</div>'}
-        else actions.append(button('Chuyển nhân viên',transfer,'primary'));
+        else actions.append(button('Chuyển nhân viên kiểm tra yêu cầu hoàn',transfer,'primary'));
         return;
       }
       if(quickCases[state.scenario] && state.step!=='transfer'){
         const c=quickCases[state.scenario];el('main-title').textContent=c.title;el('status').textContent=c.status;el('status').className='status';el('message').textContent=c.message;
         const evidence=document.createElement('div');evidence.className='notice';evidence.textContent=c.evidence;content.append(evidence);
-        if(c.next==='flights')actions.append(button('Xem chuyến thay thế',()=>chooseScenario('S1'),'primary'));
-        actions.append(button('Chuyển nhân viên',transfer,c.next==='transfer'?'primary':'ghost'));
+        if(c.next==='flights')actions.append(button('Xem hai chuyến thay thế cho cả hai',()=>chooseScenario('S1'),'primary'));
+        const helpLabel={S6:'Chuyển nhân viên kiểm tra hoàn vé',S8:'Chuyển nhân viên kiểm tra đổi tên',S9:'Chuyển nhân viên kiểm tra trẻ bay một mình'}[state.scenario]||'Nhờ nhân viên hỗ trợ';
+        actions.append(button(helpLabel,transfer,c.next==='transfer'?'primary':'ghost'));
         return;
       }
       el('main-title').textContent='Chuyến BM 213 đã huỷ';el('status').className='status';
@@ -119,10 +120,10 @@
         el('status').textContent='Chưa xác định chuyến';
         el('message').textContent=state.unavailableFlight?`${state.unavailableFlight} vừa hết chỗ trong tình huống demo. Mình đã nhả lượt giữ; chưa đổi vé. Hãy chọn chuyến còn đủ chỗ sau khi kiểm tra lại.`:state.scenario==='S4'?'BM 217 lúc 21:00 chỉ còn một chỗ, không đủ cho Nguyễn Minh An và Nguyễn Gia Bình. Mình chưa giữ hoặc đổi chuyến này. Bạn có thể chọn BM 201 hoặc BM 205 cho cả hai.':state.scenario==='S5'?'“Sáng mai” có hai chuyến: BM 201 lúc 07:00 và BM 205 lúc 09:30 ngày 13/11. Bạn chọn chuyến nào cho cả hai người? Mình chỉ giữ chỗ sau khi bạn chọn.':'Mình chưa biết bạn muốn BM 201 lúc 07:00 hay BM 205 lúc 09:30 ngày 13/11. Bạn chọn một chuyến cho cả Nguyễn Minh An và Nguyễn Gia Bình nhé. Mình sẽ giữ chỗ 20 phút, vé chỉ đổi sau khi bạn kiểm tra và bấm xác nhận.';
         const h=document.createElement('div');h.className='notice';h.innerHTML=`<span class="marker">1</span>${state.unavailableFlight?'Tồn chỗ thay đổi: xác nhận cũ không còn hiệu lực.':state.scenario==='S4'?'BM 217 không đủ chỗ cho hai người.':state.scenario==='S5'?'“Sáng mai” chưa xác định được mã chuyến.':'Khách nhắn: “Ừ đổi đi, hai mẹ con nhé.” Cần chọn đúng một chuyến trước khi giữ chỗ.'}`;content.append(h);
-        if(state.scenario==='S4'){const blocked=button('BM 217 · 12/11 · 21:00 · còn 1 chỗ — không đủ cho hai người',()=>{},'flight');blocked.disabled=true;content.append(blocked)}
-        flights.filter(f=>f.id!==state.unavailableFlight).forEach(f=>{const b=button(`${f.id} · ${f.time} · còn ${f.seats} chỗ`,()=>selectFlight(f.id),'flight');content.append(b)});
+        if(state.scenario==='S4'){const blocked=button('Không thể giữ BM 217 · 21:00 · chỉ còn 1 chỗ cho 2 người',()=>{},'flight');blocked.disabled=true;content.append(blocked)}
+        flights.filter(f=>f.id!==state.unavailableFlight).forEach(f=>{const b=button(`Chọn và giữ ${f.id} · ${f.time} · còn ${f.seats} chỗ`,()=>selectFlight(f.id),'flight');content.append(b)});
         const correction=document.createElement('p');correction.className='muted';correction.innerHTML='<span class="marker">3</span>Sau khi chọn chuyến, bạn có thể đổi lựa chọn hoặc huỷ giữ chỗ trước khi xác nhận đổi vé.';content.append(correction);
-        actions.append(button('Chuyển nhân viên',transfer));
+        actions.append(button('Nhờ nhân viên giúp chọn chuyến',transfer));
       }else if(state.step==='hold'){
         el('status').textContent='Đang giữ chỗ 20 phút';el('message').textContent=`Đã giữ tạm ${state.selected.id} cho 2 hành khách. Chưa đổi vé. Hãy kiểm tra thông tin trước khi xác nhận.`;
         const decision=document.createElement('p');
@@ -130,15 +131,15 @@
         decision.innerHTML='<span class="marker">1</span>Bạn đã chọn chuyến bên dưới cho cả hai hành khách. Vé chỉ đổi sau khi bạn xác nhận.';
         content.innerHTML=`<div class="notice"><span class="marker">3</span>Giữ chỗ còn <strong id="remaining">20:00</strong>. Có thể huỷ giữ hoặc đổi lựa chọn trước khi xác nhận. Nếu chuyển nhân viên, chỗ giữ sẽ được nhả.</div><div class="row"><span>Chuyến mới</span><strong>${state.selected.id} · ${state.selected.time}</strong></div><div class="row"><span>Hành khách</span><strong>Nguyễn Minh An và Nguyễn Gia Bình</strong></div><div class="alert">Xác nhận sẽ dùng lần đổi miễn phí duy nhất. Đổi nhầm có thể khó khôi phục.</div>`;
         content.prepend(decision);
-        actions.append(button('Xác nhận đổi cho cả hai',confirmChange,'primary'),button('Đổi lựa chọn',reset),button('Huỷ giữ chỗ',reset),button('Chuyển nhân viên',transfer),button('Giả lập hết hạn',()=>{state.deadline=null;setStep('expired')}),button('Giả lập chuyến vừa hết chỗ',simulateSeatLoss));
+        actions.append(button(`Xác nhận đổi vé sang ${state.selected.id} cho cả hai`,confirmChange,'primary'),button('Chọn chuyến khác (nhả chỗ đang giữ)',reset),button('Huỷ giữ chỗ, chưa đổi vé',reset),button('Chuyển nhân viên (nhả chỗ đang giữ)',transfer),button('Giả lập hết 20 phút giữ chỗ',()=>{state.deadline=null;setStep('expired')}),button(`Giả lập ${state.selected.id} vừa hết chỗ`,simulateSeatLoss));
       }else if(state.step==='expired'){
         el('status').textContent='Giữ chỗ hết hạn';el('message').textContent='Giữ chỗ 20 phút đã hết hạn. Chưa có lệnh đổi vé. Vui lòng chọn lại chuyến để kiểm tra số chỗ hiện tại.';
-        actions.append(button('Chọn lại chuyến',reset,'primary'),button('Chuyển nhân viên',transfer));
+        actions.append(button('Chọn lại chuyến và giữ chỗ mới',reset,'primary'),button('Chuyển nhân viên khi giữ chỗ hết hạn',transfer));
       }else if(state.step==='done'){
         el('main-title').textContent=`Đã đổi sang ${state.confirmedFlight.id}`;
         el('status').textContent='Đã xác nhận đổi · Mô phỏng';el('message').textContent=`Bạn đã xác nhận đổi sang ${state.selected.id} cho cả Nguyễn Minh An và Nguyễn Gia Bình. Lần đổi miễn phí đã được sử dụng trong mô phỏng.`;
         content.innerHTML='<div class="alert">Nếu thông tin vừa xác nhận không đúng, không thể tự khôi phục lần đổi miễn phí. Chuyển nhân viên ngay để kiểm tra phương án còn lại.</div>';
-        actions.append(button('Báo đổi nhầm · Chuyển nhân viên',transfer,'primary'),button('Làm lại ca demo',()=>chooseScenario(state.scenario)));
+        actions.append(button(`Báo đổi nhầm ${state.confirmedFlight.id} cho nhân viên`,transfer,'primary'),button(`Làm lại tình huống ${state.scenario}`,()=>chooseScenario(state.scenario)));
       }else{
         el('status').textContent='Đã chuyển nhân viên · Mô phỏng';el('message').textContent='Đã tạo phiếu hỗ trợ cho đặt chỗ TRV-7Q2K. Chưa có thời gian xử lý được xác nhận.';
         const context=document.createElement('div');context.className='notice';context.id='handoff-context';
@@ -150,7 +151,7 @@
           content.append(selected);
         }
         if(quickCases[state.scenario]){const detail=document.createElement('p');detail.textContent=`Lý do chuyển: ${quickCases[state.scenario].title}. ${quickCases[state.scenario].evidence}`;content.append(detail)}
-        actions.append(button('Làm lại ca demo',()=>chooseScenario(state.scenario)));
+        actions.append(button(`Làm lại tình huống ${state.scenario}`,()=>chooseScenario(state.scenario)));
       }
     }
     el('scenario').onchange=e=>chooseScenario(e.target.value);
