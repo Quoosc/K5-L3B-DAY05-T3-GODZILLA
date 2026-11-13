@@ -5,7 +5,7 @@
 | Họ và Tên | Mã Học Viên | Phần việc theo phân công và kết quả trong bài chung |
 |---|---|---|
 | Phạm Trấn Quốc | 2A202604113 | Phân tích lát cắt và 11 kịch bản, xây dựng phương án UX và mức tự chủ, dựng prototype và tự kiểm theo ba tiêu chí Pass/Fail. |
-| Hoàng Minh | 2A202604103 | Phụ trách UX và mức tự chủ (§3–§4): lời thoại S1/S2, phân loại lỗi, HAX, chính sách năm tool và lập luận giữ chỗ/đổi vé/chuyển người. Nội dung đã hoàn thành trong bài chung; trình bày phần quyết định thiết kế khi demo. |
+| Nguyễn Quốc Quang Anh | 2A202604120 | Phụ trách UX và mức tự chủ (§3–§4): lời thoại S1/S2, phân loại lỗi, HAX, chính sách năm tool và lập luận giữ chỗ/đổi vé/chuyển người. Nội dung đã hoàn thành trong bài chung; trình bày phần quyết định thiết kế khi demo. |
 | Nguyễn Anh Tú | 2A202604088 | Phụ trách prototype và đánh giá (§5–§6): hai luồng S1/S2, ảnh đánh số HAX, ba tiêu chí P1–P3 và kết quả kiểm tra. Nội dung đã hoàn thành trong bài chung; thao tác prototype và chỉ bằng chứng khi demo. |
 
 Bảng ghi phạm vi phụ trách theo phân công và kết quả đã có trong bài chung. Phạm Trấn Quốc đảm nhiệm triển khai bản chung; Hoàng Minh và Nguyễn Anh Tú phụ trách giải thích, trình bày các phần tương ứng theo hướng dẫn demo trong README.

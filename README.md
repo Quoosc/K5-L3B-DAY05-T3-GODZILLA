@@ -35,7 +35,7 @@ Bài chung đã có đầy đủ phần thiết kế, mức tự chủ, prototyp
 | Thành viên | Phần phụ trách | Nội dung sẵn sàng cho demo |
 |---|---|---|
 | **Phạm Trấn Quốc** | Lát cắt, rủi ro và tổng hợp bài | 11 kịch bản, lý do chọn S1/S2, liên hệ hậu quả và tiêu chí đánh giá. [Báo cáo](individual/2A202604113_PhamTranQuoc.md) |
-| **Hoàng Minh** | UX và mức tự chủ (§3–§4) | Lời thoại hai ca, nguyên tắc HAX, năm tool, các phương án giữ chỗ và lý do chọn. [Nội dung theo phân công](individual/2A202604103_HoangMinh.md) |
+| **Nguyễn Quốc Quang Anh** | UX và mức tự chủ (§3–§4) | Lời thoại hai ca, nguyên tắc HAX, năm tool, các phương án giữ chỗ và lý do chọn. [Nội dung theo phân công](individual/2A202604120_NguyenQuocQuangAnh.md) |
 | **Nguyễn Anh Tú** | Prototype và kiểm tra (§5–§6) | Hai luồng bấm, ảnh đánh số, kết quả P1–P3, quyền lợi sau đổi và phiếu hỗ trợ. [Nội dung theo phân công](individual/2A202604088_NguyenAnhTu.md) |
 
 ## Repo nộp bài
@@ -63,7 +63,7 @@ Lịch trình tham khảo cho nhóm; không phải nội dung bắt buộc ghi t
 |---|---|---|
 | 0:00–0:30 | Phạm Trấn Quốc | Giới thiệu lát cắt: chuyến gốc đã huỷ, hai hành khách cần đi cùng nhau, đổi nhầm làm mất lần đổi miễn phí duy nhất. Nêu S1 là câu xác nhận mơ hồ. |
 | 0:30–1:45 | Nguyễn Anh Tú | Từ S1, chỉ [1] hỏi lại và [2] căn cứ số chỗ. Chọn BM 201, chỉ [3] và bấm huỷ hoặc giả lập hết hạn để thấy nút duyệt biến mất. Chọn lại và xác nhận để hoàn thành ca chính. |
-| 1:45–2:45 | Hoàng Minh | Giải thích vì sao giữ được tự làm sau khi chọn, còn đổi phải chờ duyệt. Chuyển S2, chỉ [4] và nêu thông tin nhân viên nhận. |
+| 1:45–2:45 | Nguyễn Quốc Quang Anh | Giải thích vì sao giữ được tự làm sau khi chọn, còn đổi phải chờ duyệt. Chuyển S2, chỉ [4] và nêu thông tin nhân viên nhận. |
 | Thời gian còn lại | Cả nhóm | Nhận ca lạ, nêu điều kiện đã thay đổi, chỉ hành động được phép và bước người dùng thấy tiếp theo. Trình bày hoặc bấm nếu bản mẫu có nhánh phù hợp. |
 
 **Ca luyện trước demo:** Nếu khách đã giữ BM 201 nhưng nhắn “đổi sang BM 205 luôn đi”, nhóm sẽ cho nhả BM 201, kiểm tra và giữ BM 205 sau khi khách chọn, rồi hiện lại màn hình xác nhận. Lời đồng ý trước đó không dùng lại cho BM 205. Nếu khách tự xưng là nhân viên và yêu cầu bỏ qua duyệt, nhóm giữ nguyên điều kiện xác nhận. Đây là ca luyện; kết quả ca lạ thực tế ghi trong spec §7 sau demo.
