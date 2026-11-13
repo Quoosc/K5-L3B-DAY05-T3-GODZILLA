@@ -170,8 +170,8 @@ Cập nhật sau buổi demo trên lớp:
 
 **Tóm tắt phần trình bày và file demo:** Quốc giới thiệu lát cắt và rủi ro; Quang Anh giải thích quyết định UX và mức tự chủ; Tú thao tác prototype và chỉ các bằng chứng kiểm tra. File demo là [prototype/index.html](prototype/index.html), mở trực tiếp bằng trình duyệt, không cần cài đặt. Ca S1 minh hoạ hỏi lại, giữ chỗ và xác nhận đổi; ca S2 minh hoạ giới hạn của yêu cầu hoàn đã gửi và chuyển nhân viên. Các thao tác đều là mô phỏng, không kết nối hệ thống đặt vé thật.
 
+
 - **Ca lạ được đưa ra:** …Tình huống khách muốn đổi chuyến sau khi chuyến bay ban đầu bị huỷ, nhưng chưa xác định rõ chuyến thay thế; đồng thời yêu cầu rút yêu cầu hoàn vé đã gửi trước đó. Đây là tình huống có rủi ro cao vì thao tác đổi vé có thể sử dụng lần đổi miễn phí duy nhất, còn yêu cầu hoàn đã gửi không thể huỷ.
-- 
 - **Cách prototype hoặc nhóm xử lý:** …Nhóm sử dụng prototype để minh hoạ hai luồng S1 và S2. Với S1, trợ lý không tự chọn chuyến mà yêu cầu khách xác nhận BM 201 hoặc BM 205, sau đó mới giữ chỗ trong 20 phút và yêu cầu duyệt trước khi đổi vé. Với S2, trợ lý thông báo yêu cầu hoàn đã gửi không thể huỷ, không tự ý đổi vé và cung cấp chức năng chuyển nhân viên kèm thông tin đặt chỗ để kiểm tra phương án tiếp theo.
-- 
+
 - **Quyết định giữ nguyên hoặc điều chỉnh thiết kế, kèm lý do:** …Nhóm giữ nguyên thiết kế hiện tại vì hai luồng đã đáp ứng các nguyên tắc an toàn: không tự thực hiện hành động khó đảo ngược khi chưa có xác nhận, minh bạch trạng thái dữ liệu và cung cấp phương án hỗ trợ khi vượt quá quyền hạn của AI. Tuy nhiên, nhóm xác định cần cải thiện khả năng kiểm tra lại tình trạng chỗ và trạng thái hoàn tại thời điểm xác nhận trên hệ thống thực tế, nhằm tránh trường hợp dữ liệu mô phỏng không còn chính xác.
