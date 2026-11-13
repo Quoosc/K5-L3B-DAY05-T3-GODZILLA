@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Đặt chỗ của tôi · Hỗ trợ chuyến bị huỷ</title>
+  <style>
+    [hidden]{display:none!important}
+    :root{font-family:Inter,"Segoe UI",sans-serif;color:#182a42;background:#f3f6fa}*{box-sizing:border-box}body{margin:0}button{font:inherit;cursor:pointer}header{background:#103658;color:white;padding:18px max(24px,calc((100vw - 1100px)/2))}header strong{font-size:19px}.wrap{max-width:1100px;margin:26px auto;padding:0 20px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}.top h1{font-size:26px;margin:0 0 5px}.top p{margin:0;color:#5b6c7e}.tabs{display:flex;gap:8px}.tabs button,.ghost{border:1px solid #bdccda;background:white;color:#174261;border-radius:9px;padding:10px 13px}.tabs button.active{background:#174261;color:white}.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.card{background:white;border:1px solid #dce5ee;border-radius:15px;padding:22px;box-shadow:0 7px 24px #19395b0a}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;color:#55728c;text-transform:uppercase}.card h2{margin:8px 0 12px;font-size:22px}.status{display:inline-block;background:#fff3df;color:#83500c;font-size:13px;font-weight:700;padding:7px 10px;border-radius:7px}.status.red{background:#fde8e6;color:#9e2924}.alert{background:#fff7e8;border-left:4px solid #d08a17;border-radius:7px;padding:12px 14px;line-height:1.5;margin:15px 0}.notice{background:#eaf5fc;border-left:4px solid #2d78a5;border-radius:7px;padding:12px 14px;line-height:1.5;margin:15px 0}.flight{width:100%;display:block;text-align:left;background:#fff;border:2px solid #dbe5ed;border-radius:12px;padding:14px;margin:10px 0}.flight:hover,.flight.selected{border-color:#177da4;background:#f0faff}.flight strong{font-size:18px}.flight small{display:block;color:#53677b;margin-top:5px}.row{display:flex;justify-content:space-between;gap:15px;padding:10px 0;border-bottom:1px solid #edf0f4}.row:last-child{border-bottom:0}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.primary{background:#116d94;color:#fff;border:1px solid #116d94;border-radius:9px;padding:11px 15px;font-weight:700}.primary:disabled{opacity:.45;cursor:not-allowed}.danger{color:#b3312d;font-weight:700}.marker{display:inline-flex;align-items:center;justify-content:center;background:#173d60;color:#fff;border-radius:50%;width:23px;height:23px;font-size:12px;font-weight:800;margin-right:7px}p{line-height:1.55}.muted{color:#68798b}.complete{color:#177043;font-weight:700}.hidden{display:none}@media(max-width:760px){.grid{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}.tabs{width:100%;overflow:auto}.tabs button{white-space:nowrap}}
+  </style>
+</head>
+<body>
+  <header><strong>Đặt chỗ của tôi</strong> · Hỗ trợ khi chuyến bị huỷ</header>
+  <main class="wrap">
+    <div class="top"><div><h1>Đặt chỗ TRV-7Q2K</h1><p>Hà Nội → TP.HCM · Dữ liệu dựng cho Lab 5</p></div><div class="tabs"><button id="tab-change" class="active">Ca đổi chuyến</button><button id="tab-refund">Ca khác: Hoàn đã gửi</button></div></div>
+    <div class="grid">
+      <section class="card" aria-live="polite">
+        <div class="eyebrow">Trợ lý hỗ trợ đặt chỗ · Mô phỏng</div>
+        <h2 id="main-title">Chuyến BM 213 đã huỷ</h2>
+        <span id="status" class="status">Cần làm rõ lựa chọn</span>
+        <p id="message"></p>
+        <div id="main-content"></div>
+        <div id="actions" class="actions"></div>
+      </section>
+      <aside class="card">
+        <div class="eyebrow">Căn cứ từ đặt chỗ</div>
+        <h2>Thông tin kiểm tra</h2>
+        <div class="row"><span>Chuyến gốc</span><strong>BM 213 · 12/11 · 19:00</strong></div>
+        <div class="row"><span>Trạng thái chuyến gốc</span><strong class="danger">Đã huỷ do bão</strong></div>
+        <div class="row" id="confirmed-row" hidden><span>Chuyến đã đổi</span><strong id="confirmed-flight"></strong></div>
+        <div class="row"><span>Hành khách</span><strong>Nguyễn Minh An, Nguyễn Gia Bình</strong></div>
+        <div class="row"><span>Quyền lợi</span><strong id="booking-policy">Đổi miễn phí 1 lần trong 48 giờ hoặc hoàn toàn bộ</strong></div>
+        <p class="muted" id="seat-evidence"><span class="marker">2</span>BM 217 lúc 21:00 chỉ còn 1 chỗ, không đủ cho cả hai. BM 201 còn 9 chỗ, BM 205 còn 4 chỗ theo dữ liệu mẫu lúc 15:00 ngày 12/11.</p>
+        <p class="muted">Huỷ do thời tiết nên không có bồi thường tiền mặt theo chính sách hãng Bay Mẫu.</p>
+      </aside>
+    </div>
+  </main>
+  <script>
+    const flights = [{id:'BM 201',time:'13/11 · 07:00',seats:9},{id:'BM 205',time:'13/11 · 09:30',seats:4}];
+    const state = {case:'change',step:'clarify',selected:null,deadline:null,confirmedFlight:null,transferReason:null};
+    const el = id => document.getElementById(id);
+    const button = (label,handler,kind='ghost') => {const node=document.createElement('button');node.textContent=label;node.className=kind;node.onclick=handler;return node};
+    function selectFlight(id){
+      const flight=flights.find(f=>f.id===id && f.seats>=2);
+      if(state.case!=='change'||state.step!=='clarify'||!flight)return;
+      state.selected=flight;
+      state.deadline=Date.now()+20*60*1000;
+      setStep('hold');
+    }
+    function setStep(step){state.step=step;render()}
+    // Reset starts a new demo; it is not an undo of a completed ticket change.
+    function reset(){state.selected=null;state.deadline=null;state.confirmedFlight=null;state.transferReason=null;setStep('clarify')}
+    function confirmChange(){
+      if(state.case!=='change'||state.step!=='hold'||!state.selected||state.confirmedFlight)return;
+      if(Date.now()>=state.deadline){state.deadline=null;setStep('expired');return}
+      state.confirmedFlight={...state.selected};state.deadline=null;setStep('done');
+    }
+    function transfer(){
+      state.transferReason=state.case==='refund'?'refund':state.confirmedFlight?'wrong-change':state.step==='hold'?'release-hold':state.step==='expired'?'expired':'clarification';
+      state.deadline=null;
+      setStep('transfer');
+    }
+    function render(){
+      const refund=state.case==='refund';el('tab-change').classList.toggle('active',!refund);el('tab-refund').classList.toggle('active',refund);
+      el('tab-change').setAttribute('aria-pressed',String(!refund));
+      el('tab-refund').setAttribute('aria-pressed',String(refund));
+      el('seat-evidence').hidden=refund||Boolean(state.confirmedFlight);
+      el('confirmed-row').hidden=!state.confirmedFlight;
+      el('confirmed-flight').textContent=state.confirmedFlight?`${state.confirmedFlight.id} · ${state.confirmedFlight.time}`:'';
+      el('booking-policy').textContent=refund?'Cần xác minh sau khi đã gửi yêu cầu hoàn':state.confirmedFlight?'Đã sử dụng lần đổi miễn phí. Các thay đổi tiếp theo cần nhân viên kiểm tra.':'Đổi miễn phí 1 lần trong 48 giờ hoặc hoàn toàn bộ';
+      const content=el('main-content'),actions=el('actions');content.replaceChildren();actions.replaceChildren();
+      if(refund){
+        el('main-title').textContent='Yêu cầu hoàn đã gửi';el('status').textContent=state.step==='transfer'?'Đã chuyển nhân viên · Mô phỏng':'Không thể huỷ yêu cầu hoàn';el('status').className='status red';
+        el('message').textContent=state.step==='transfer'?'Đã tạo phiếu hỗ trợ cho đặt chỗ TRV-7Q2K. Yêu cầu hoàn vẫn ở trạng thái đã gửi.':'Yêu cầu hoàn của đặt chỗ TRV-7Q2K đã được gửi và không thể huỷ. Mình chưa có thông tin xác nhận vé còn đổi được. Bấm “Chuyển nhân viên” để kiểm tra tình trạng vé và các phương án còn lại. Bạn không cần gửi thêm yêu cầu hoàn.';
+        content.innerHTML='<div class="alert"><span class="marker">4</span>Yêu cầu hoàn đã gửi lúc 15:10 ngày 12/11. Gửi rồi không huỷ được. Nhân viên sẽ kiểm tra trạng thái xử lý, không huỷ yêu cầu đã gửi.</div>';
+        if(state.step==='transfer'){content.innerHTML+='<div class="notice">Đã tạo phiếu hỗ trợ mô phỏng. Nhân viên nhận mã TRV-7Q2K, trạng thái hoàn đã gửi và yêu cầu kiểm tra khả năng đổi chuyến. Chưa có thời gian xử lý được xác nhận.</div>'}
+        else actions.append(button('Chuyển nhân viên',transfer,'primary'));
+        return;
+      }
+      el('main-title').textContent='Chuyến BM 213 đã huỷ';el('status').className='status';
+      if(state.step==='clarify'){
+        el('status').textContent='Chưa xác định chuyến';
+        el('message').textContent='Mình chưa biết bạn muốn BM 201 lúc 07:00 hay BM 205 lúc 09:30 ngày 13/11. Bạn chọn một chuyến cho cả Nguyễn Minh An và Nguyễn Gia Bình nhé. Mình sẽ giữ chỗ 20 phút, vé chỉ đổi sau khi bạn kiểm tra và bấm xác nhận.';
+        const h=document.createElement('div');h.className='notice';h.innerHTML='<span class="marker">1</span>Khách nhắn: “Ừ đổi đi, hai mẹ con nhé.” Cần chọn đúng một chuyến trước khi giữ chỗ.';content.append(h);
+        flights.forEach(f=>{const b=button(`${f.id} · ${f.time} · còn ${f.seats} chỗ`,()=>selectFlight(f.id),'flight');content.append(b)});
+        const correction=document.createElement('p');correction.className='muted';correction.innerHTML='<span class="marker">3</span>Sau khi chọn chuyến, bạn có thể đổi lựa chọn hoặc huỷ giữ chỗ trước khi xác nhận đổi vé.';content.append(correction);
+        actions.append(button('Chuyển nhân viên',transfer));
+      }else if(state.step==='hold'){
+        el('status').textContent='Đang giữ chỗ 20 phút';el('message').textContent=`Đã giữ tạm ${state.selected.id} cho 2 hành khách. Chưa đổi vé. Hãy kiểm tra thông tin trước khi xác nhận.`;
+        const decision=document.createElement('p');
+        decision.className='muted';
+        decision.innerHTML='<span class="marker">1</span>Bạn đã chọn chuyến bên dưới cho cả hai hành khách. Vé chỉ đổi sau khi bạn xác nhận.';
+        content.innerHTML=`<div class="notice"><span class="marker">3</span>Giữ chỗ còn <strong id="remaining">20:00</strong>. Có thể huỷ giữ hoặc đổi lựa chọn trước khi xác nhận. Nếu chuyển nhân viên, chỗ giữ sẽ được nhả.</div><div class="row"><span>Chuyến mới</span><strong>${state.selected.id} · ${state.selected.time}</strong></div><div class="row"><span>Hành khách</span><strong>Nguyễn Minh An và Nguyễn Gia Bình</strong></div><div class="alert">Xác nhận sẽ dùng lần đổi miễn phí duy nhất. Đổi nhầm có thể khó khôi phục.</div>`;
+        content.prepend(decision);
+        actions.append(button('Xác nhận đổi cho cả hai',confirmChange,'primary'),button('Đổi lựa chọn',reset),button('Huỷ giữ chỗ',reset),button('Chuyển nhân viên',transfer),button('Giả lập hết hạn',()=>{state.deadline=null;setStep('expired')}));
+      }else if(state.step==='expired'){
+        el('status').textContent='Giữ chỗ hết hạn';el('message').textContent='Giữ chỗ 20 phút đã hết hạn. Chưa có lệnh đổi vé. Vui lòng chọn lại chuyến để kiểm tra số chỗ hiện tại.';
+        actions.append(button('Chọn lại chuyến',reset,'primary'),button('Chuyển nhân viên',transfer));
+      }else if(state.step==='done'){
+        el('main-title').textContent=`Đã đổi sang ${state.confirmedFlight.id}`;
+        el('status').textContent='Đã xác nhận đổi · Mô phỏng';el('message').textContent=`Bạn đã xác nhận đổi sang ${state.selected.id} cho cả Nguyễn Minh An và Nguyễn Gia Bình. Lần đổi miễn phí đã được sử dụng trong mô phỏng.`;
+        content.innerHTML='<div class="alert">Nếu thông tin vừa xác nhận không đúng, không thể tự khôi phục lần đổi miễn phí. Chuyển nhân viên ngay để kiểm tra phương án còn lại.</div>';
+        actions.append(button('Báo đổi nhầm · Chuyển nhân viên',transfer,'primary'),button('Làm lại ca demo',reset));
+      }else{
+        el('status').textContent='Đã chuyển nhân viên · Mô phỏng';el('message').textContent='Đã tạo phiếu hỗ trợ cho đặt chỗ TRV-7Q2K. Chưa có thời gian xử lý được xác nhận.';
+        const context=document.createElement('div');context.className='notice';context.id='handoff-context';
+        context.textContent=state.confirmedFlight?`Khách báo đổi nhầm. Đã đổi từ BM 213 (đã huỷ) sang ${state.confirmedFlight.id} · ${state.confirmedFlight.time} cho Nguyễn Minh An và Nguyễn Gia Bình. Đã sử dụng lần đổi miễn phí. Nhân viên cần kiểm tra phương án tiếp theo; chưa thực hiện thêm thay đổi nào.`:`Chưa đổi vé; chưa sử dụng lần đổi miễn phí. Hành khách: Nguyễn Minh An và Nguyễn Gia Bình. ${state.transferReason==='release-hold'?'Đã huỷ lượt giữ tạm theo yêu cầu chuyển nhân viên.':state.transferReason==='expired'?'Lượt giữ đã hết hạn.':'Khách cần hỗ trợ chọn chuyến.'} Nhân viên cần kiểm tra chuyến còn đủ hai chỗ trước khi đề xuất.`;
+        content.append(context);
+        if(state.selected){
+          const selected=document.createElement('p');
+          selected.textContent=`Chuyến liên quan: ${state.selected.id} · ${state.selected.time}. Phiếu hỗ trợ không giữ chỗ.`;
+          content.append(selected);
+        }
+        actions.append(button('Làm lại ca demo',reset));
+      }
+    }
+    el('tab-change').onclick=()=>{if(state.case!=='change'){state.case='change';reset()}};
+    el('tab-refund').onclick=()=>{if(state.case!=='refund'){state.case='refund';state.selected=null;state.deadline=null;state.confirmedFlight=null;state.transferReason=null;setStep('refund')}};
+    setInterval(()=>{if(state.case!=='change'||state.step!=='hold')return;const seconds=Math.max(0,Math.ceil((state.deadline-Date.now())/1000));if(seconds===0){setStep('expired');return}el('remaining').textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`},1000);
+    if(location.hash==='#refund'){state.case='refund';state.step='refund'}
+    render();
+  </script>
+</body>
+</html>
