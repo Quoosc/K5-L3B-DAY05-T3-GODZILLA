@@ -1,4 +1,4 @@
-<img width="528" height="665" alt="image" src="https://github.com/user-attachments/assets/16bcddcc-63b8-406c-9801-412b1589f1d5" /># Bài nộp LAB5 — T3 Du lịch · Nhóm GODZILLA
+# Bài nộp LAB5 — T3 Du lịch · Nhóm GODZILLA
 
 **Lớp:** L3B · **Track:** T3 · **Bàn / zone:** [điền khi demo]
 
