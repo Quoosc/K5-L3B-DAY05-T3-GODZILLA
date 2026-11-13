@@ -1,6 +1,6 @@
 # Bài nộp LAB5 — T3 Du lịch · Nhóm GODZILLA
 
-**Lớp:** L3B · **Track:** T3 · **Bàn / zone:** [điền khi demo]
+**Lớp:** L3B · **Track:** T3 · **Bàn / zone:** 
 
 | Họ và Tên | Mã Học Viên | Phần việc theo phân công và kết quả trong bài chung |
 |---|---|---|
@@ -85,7 +85,7 @@ Các biến thể phân loại ở bảng là phân tích thiết kế, không p
 
 Nếu khách bấm nhầm thẻ chuyến (lỗi thao tác), giao diện nhắc lại mã chuyến vừa giữ và cho đổi lựa chọn hoặc huỷ. Không cần khách giải thích lại toàn bộ yêu cầu. Nếu khách chọn chuyển nhân viên khi đang giữ, prototype nhả lượt giữ tạm và giữ thông tin chuyến trong phiếu hỗ trợ. Sau khi đã đổi, phiếu hỗ trợ không tạo thêm lần đổi hay cam kết khôi phục vé.
 
-**Bốn đường trải nghiệm theo guide:** bình thường (S3, tra cứu và trả lời trạng thái chuyến); thiếu thông tin (S1, hỏi đúng chuyến); thiếu căn cứ hoặc quyền (S2, dừng thay đổi và chuyển người); người dùng sửa AI (S1 huỷ/đổi lựa chọn trước duyệt, S11 báo đổi nhầm sau duyệt). S3 được thử trong lập luận ở §4; bản mẫu chỉ dựng hai ca khó S1 và S2.
+**Bốn đường trải nghiệm theo guide:** bình thường (S3, tra cứu và trả lời trạng thái chuyến); thiếu thông tin (S1, hỏi đúng chuyến); thiếu căn cứ hoặc quyền (S2, dừng thay đổi và chuyển người); người dùng sửa AI (S1 huỷ/đổi lựa chọn trước duyệt, S11 báo đổi nhầm sau duyệt). Bản mẫu có 11 tình huống trong cùng giao diện. S1 và S2 là hai luồng chính; S3 và các nhánh S4–S11 bổ sung bằng chứng về chính sách trong §4–§6.
 
 ## §4. Mức tự chủ
 
@@ -107,17 +107,19 @@ Nếu khách bấm nhầm thẻ chuyến (lỗi thao tác), giao diện nhắc l
 |---|---|---|---|
 | S1 “đổi đi” | Có. `doi_chuyen_bay` bị khoá tới khi chọn chuyến và duyệt hai hành khách. | Không. AI chỉ đọc dữ liệu, sau khi chọn mới giữ tạm. | Không. Chọn chuyến rồi giữ chỗ ngay. |
 | S2 hoàn đã gửi | Có. Không có hành động rút hoàn hoặc đổi vé tự động. | Không. Chuyển nhân viên cùng trạng thái. | Không áp dụng, đây là ca cần người xử lý. |
-| S3 hỏi giờ bay (thử chính sách trên giấy) | Có. Câu trả lời dự kiến nêu chuyến gốc 19:00 đã huỷ, tránh hiểu đó là chuyến vẫn bay. | Không. Chỉ đọc `tra_cuu_dat_cho`. | Không. Có thể trả lời ngay từ dữ liệu tra cứu. |
+| S3 hỏi giờ bay (bấm được trong prototype) | Có. Câu trả lời nêu chuyến gốc 19:00 đã huỷ, tránh hiểu đó là chuyến vẫn bay. | Không. Chỉ đọc `tra_cuu_dat_cho`. | Không. Có thể trả lời ngay từ dữ liệu tra cứu. |
 
 **Lời hứa với khách đã đổi:** trợ lý có thể **giữ chỗ tạm ngay sau khi khách chọn chuyến**, còn **đổi vé chỉ xảy ra sau màn hình khách xác nhận**. Với hoàn vé, trợ lý hướng dẫn và chuyển nhân viên xác minh trước khi gửi.
 
 **Điều kiện chặn:** Một xác nhận chỉ áp dụng cho đúng mã chuyến và danh sách hành khách đang hiển thị, trong thời hạn giữ. Đổi lựa chọn, huỷ, hết hạn hoặc chuyển nhân viên làm mất hiệu lực xác nhận cũ. Tin tự xưng nhân viên không mở quyền duyệt (S10). Khi yêu cầu hoàn đã gửi, không có thao tác rút hoàn hoặc gửi lại. Trong thiết kế đầy đủ, khách chỉ xác nhận gửi hoàn sau khi nhân viên kiểm tra đặt chỗ và hiển thị khoản hoàn, nơi nhận, thời gian ước tính và cảnh báo không thể rút. Nếu thiếu dữ kiện hoặc chưa có xác nhận, yêu cầu vẫn chưa gửi.
 
+**Thứ tự kiểm tra khi nhiều điều kiện cùng xuất hiện:** trạng thái đặt chỗ quyết định hành động được phép trước khi xét lời đồng ý của khách. Nếu yêu cầu hoàn đã gửi, áp dụng S2 dù khách đồng thời nói “đổi đi”, chọn rõ BM 201 hoặc tự xưng nhân viên: không giữ chuyến mới, không đổi vé, không rút hay gửi lại yêu cầu hoàn; chuyển nhân viên xác minh. Chỉ dùng S1 với ca độc lập chưa có trạng thái hoàn đã gửi và còn đủ điều kiện đổi. Tồn chỗ đủ hoặc lời xác nhận của khách không chứng minh vé còn được đổi sau khi gửi hoàn.
+
 **Xử lý duyệt chậm:** Nếu giữ chỗ hết 20 phút, hệ thống nhả chỗ và khách phải chọn lại trước khi đổi. Nếu nhân viên chưa xác minh hoặc khách chưa xác nhận trước khi kết thúc phiên hoàn, chỉ giữ thông tin đã nhập dưới dạng bản nháp; khi tiếp tục cần kiểm tra trạng thái và xác nhận lại. Luồng hoàn mới là đề xuất, chưa dựng trong prototype.
 
 **Phương án mức tự chủ dùng trong bài chung:** Tra cứu được tự làm; giữ tạm sau khi chọn rõ và đủ chỗ; đổi cần khách duyệt; gửi hoàn mới cần kiểm tra đủ dữ kiện và khách duyệt; chuyển người được thực hiện khi có yêu cầu hoặc ca vượt quyền. Chính sách đã được thể hiện trong prototype và thử trên S1, S2, S3.
 
-**Đối chiếu năm tool phục vụ phần trình bày của ba thành viên:** Quốc trình bày rủi ro và phạm vi; Minh giải thích quyết định UX; Tú chỉ hành vi và bằng chứng trên prototype.
+**Đối chiếu năm tool phục vụ phần trình bày của ba thành viên:** Quốc trình bày rủi ro và phạm vi; Quang Anh giải thích quyết định UX; Tú chỉ hành vi và bằng chứng trên prototype.
 
 | Tool | Mức trong bài chung | Lập luận UX | Bằng chứng hoặc giới hạn triển khai |
 |---|---|---|---|
@@ -137,7 +139,15 @@ Nếu khách bấm nhầm thẻ chuyến (lỗi thao tác), giao diện nhắc l
 
 **Điều kiện đổi chính sách:** Nếu còn thiếu số hành khách, không chắc tồn chỗ hoặc yêu cầu trẻ bay một mình, dừng tự giữ và hỏi/tra cứu/chuyển người theo dữ kiện thiếu. Nếu đã đổi, không quay lại nhánh giữ như thể còn nguyên quyền lợi.
 
-Phần này là phương án thiết kế đã chuẩn bị cho nhóm và căn cứ để giải thích ở demo. Guide §4.3 còn yêu cầu mỗi người tự xếp mức trước khi trao đổi; bảng phương án chung không ghi nhận thay lịch sử lựa chọn độc lập của từng người.
+**Lựa chọn ban đầu của từng thành viên cho tool khó nhất:** theo thông tin Phạm Trấn Quốc bổ sung khi rà soát, cả ba cùng chọn mức 1 — tự làm cho `giu_cho_chuyen_moi`.
+
+| Thành viên | Mức ban đầu cho giữ chỗ |
+|---|---|
+| Phạm Trấn Quốc | Mức 1 — tự làm. |
+| Nguyễn Quốc Quang Anh | Mức 1 — tự làm. |
+| Nguyễn Anh Tú | Mức 1 — tự làm. |
+
+**Cách chốt và giới hạn của mức 1:** ba người thống nhất về mức, nhưng tự làm không có nghĩa là tự chọn chuyến thay khách. Phương án cuối trong bài là chỉ giữ sau khi khách chọn đúng mã chuyến, đủ chỗ cho cả hai và trạng thái đặt chỗ cho phép; giữ tối đa 20 phút, cho nhả sớm và không dùng lần đổi miễn phí. Cái khó nằm ở điều kiện thực hiện: tự giữ ngay theo S1 có thể chiếm sai chỗ; luôn chờ nhân viên có thể làm mất chỗ; trong S2, ngay cả lựa chọn chuyến rõ ràng cũng không đủ vì yêu cầu hoàn đã gửi. Vì vậy ca chung ở §7 đi theo S2, không áp dụng mức tự giữ của một đặt chỗ còn đủ điều kiện đổi. Các phương án, hậu quả và lý do loại đã được đối chiếu ở bảng trên; cả ba cùng chọn một mức, còn lập luận được thể hiện bằng việc so sánh các điều kiện và hậu quả.
 
 ## §5. Prototype
 
@@ -162,16 +172,20 @@ Phần này là phương án thiết kế đã chuẩn bị cho nhóm và căn c
 
 **Kiểm tra các nhánh mở rộng:** S3–S10 hiển thị lời giải thích gắn dữ liệu và không có nút xác nhận đổi khi chưa chọn/duyệt; S4 vô hiệu hoá BM 217; S6/S8/S9 có đường chuyển nhân viên cùng lý do; S10 mở lại lựa chọn bình thường thay vì bỏ duyệt; S11 giữ đúng quyền lợi đã dùng và chuyển lịch sử đổi. Biến thể hết chỗ làm mất nút xác nhận cũ và lọc chuyến vừa hết. Các ca này là bằng chứng bổ sung, không thay thế hai ca được tự chấm P1–P3 ở trên.
 
+**Đối chiếu bổ sung sau demo:** chạy lại biến thể S4 hết chỗ và ca S2 có yêu cầu đổi chuyến trên cùng đặt chỗ đã gửi hoàn. S4 loại BM 201 vừa hết chỗ, bỏ quyền xác nhận cũ và cho chọn lại BM 205. S2 không có nút chọn/giữ/đổi/rút hoàn; phiếu hỗ trợ giữ mã đặt chỗ, tên hai hành khách, thời điểm gửi hoàn, mong muốn đổi chuyến và việc cần xác minh. Hai phép thử đạt điều kiện chặn của P1 và dữ liệu bàn giao của P3; không ghi nhận lỗi JavaScript trong các bước này. Đây là kết quả kiểm tra lại bản nộp, không thay phần ghi nhận diễn biến demo ở §7.
+
 **Lỗi còn lại:** prototype mô phỏng trạng thái và số chỗ cố định. Một sản phẩm thật phải đọc lại tồn chỗ và trạng thái hoàn tại thời điểm duyệt, xử lý xung đột nếu chỗ vừa hết. Fixture không có số tiền/phương thức hoàn nên luồng gửi hoàn mới không thể hoàn tất trong bản mẫu.
 
 ## §7. Demo
 
-Cập nhật sau buổi demo trên lớp:
+**Phần trình bày:** Quốc giới thiệu lát cắt và rủi ro; Quang Anh giải thích quyết định UX và mức tự chủ; Tú thao tác prototype và chỉ bằng chứng kiểm tra. File demo là [prototype/index.html](prototype/index.html), chạy trực tiếp trên trình duyệt với dữ liệu mô phỏng. S1 minh hoạ hỏi lại, giữ chỗ và xác nhận đổi; S2 minh hoạ giới hạn của yêu cầu hoàn đã gửi và đường chuyển nhân viên.
 
-**Tóm tắt phần trình bày và file demo:** Quốc giới thiệu lát cắt và rủi ro; Quang Anh giải thích quyết định UX và mức tự chủ; Tú thao tác prototype và chỉ các bằng chứng kiểm tra. File demo là [prototype/index.html](prototype/index.html), mở trực tiếp bằng trình duyệt, không cần cài đặt. Ca S1 minh hoạ hỏi lại, giữ chỗ và xác nhận đổi; ca S2 minh hoạ giới hạn của yêu cầu hoàn đã gửi và chuyển nhân viên. Các thao tác đều là mô phỏng, không kết nối hệ thống đặt vé thật.
+**Ca lạ nhận được:** trên cùng một đặt chỗ, khách muốn đổi chuyến sau khi chuyến gốc bị huỷ nhưng chưa chọn rõ chuyến thay thế, đồng thời muốn rút yêu cầu hoàn đã gửi. Đây là một ca chung, không phải hai ca độc lập.
 
+**Cách nhóm trả lời:** các trường hợp ngoài phạm vi xử lý của trợ lý được chuyển nhân viên. Trong ca này, yêu cầu hoàn đã gửi không thể rút bằng tool hiện có, và chưa có căn cứ xác nhận vé còn được đổi. Vì vậy áp dụng S2: dừng giữ/đổi, nêu giới hạn và chuyển nhân viên kiểm tra trạng thái vé cùng phương án còn lại. Không tiếp tục S1 chỉ vì khách đồng ý hoặc chọn được mã chuyến. Đây là giới hạn quyền xử lý của AI trong lát cắt, không có nghĩa mọi câu hỏi thiếu thông tin đều phải chuyển người; S1 chưa gửi hoàn vẫn có thể hỏi lại để khách chọn chuyến.
 
-- **Ca lạ được đưa ra:** …Tình huống khách muốn đổi chuyến sau khi chuyến bay ban đầu bị huỷ, nhưng chưa xác định rõ chuyến thay thế; đồng thời yêu cầu rút yêu cầu hoàn vé đã gửi trước đó. Đây là tình huống có rủi ro cao vì thao tác đổi vé có thể sử dụng lần đổi miễn phí duy nhất, còn yêu cầu hoàn đã gửi không thể huỷ.
-- **Cách prototype hoặc nhóm xử lý:** …Nhóm sử dụng prototype để minh hoạ hai luồng S1 và S2. Với S1, trợ lý không tự chọn chuyến mà yêu cầu khách xác nhận BM 201 hoặc BM 205, sau đó mới giữ chỗ trong 20 phút và yêu cầu duyệt trước khi đổi vé. Với S2, trợ lý thông báo yêu cầu hoàn đã gửi không thể huỷ, không tự ý đổi vé và cung cấp chức năng chuyển nhân viên kèm thông tin đặt chỗ để kiểm tra phương án tiếp theo.
+**Hành vi đối chiếu trên prototype:** mở S2 → **Mô phỏng khách hỏi: huỷ hoàn để đổi chuyến** → không có nút chọn/giữ/đổi/rút hoàn → **Chuyển nhân viên kiểm tra yêu cầu hoàn**. Phiếu chứa TRV-7Q2K, Nguyễn Minh An và Nguyễn Gia Bình, trạng thái hoàn đã gửi lúc 15:10, mong muốn đổi chuyến và việc nhân viên cần xác minh. Sau chuyển, yêu cầu hoàn vẫn ở trạng thái đã gửi; không hứa huỷ được hoàn, đổi được vé hay thời điểm nhân viên trả lời. Các bước này đã được chạy lại khi rà soát bài nộp.
 
-- **Quyết định giữ nguyên hoặc điều chỉnh thiết kế, kèm lý do:** …Nhóm giữ nguyên thiết kế hiện tại vì hai luồng đã đáp ứng các nguyên tắc an toàn: không tự thực hiện hành động khó đảo ngược khi chưa có xác nhận, minh bạch trạng thái dữ liệu và cung cấp phương án hỗ trợ khi vượt quá quyền hạn của AI. Tuy nhiên, nhóm xác định cần cải thiện khả năng kiểm tra lại tình trạng chỗ và trạng thái hoàn tại thời điểm xác nhận trên hệ thống thực tế, nhằm tránh trường hợp dữ liệu mô phỏng không còn chính xác.
+**Quyết định sau ca lạ:** giữ mức tự chủ của năm tool và đường chuyển nhân viên trong S2; làm rõ ở §4 rằng trạng thái hoàn đã gửi được kiểm tra trước ý định chọn chuyến. Số chỗ đủ hoặc lời xác nhận của khách không mở lại quyền đổi khi chưa xác minh tình trạng vé. Nhân viên tiếp nhận để kiểm tra phương án còn lại, không được mô tả như người có thể huỷ một thao tác mà tool quy định không đảo được. Việc chọn tab S1 chỉ khởi tạo ca mô phỏng độc lập, không xoá trạng thái hoàn của ca S2.
+
+**Giới hạn còn lại:** prototype dùng dữ liệu dựng, không kết nối hãng bay hoặc nhân viên thật. Sản phẩm thực tế phải kiểm tra lại trạng thái vé và tồn chỗ trước thao tác có hậu quả; kết quả mô phỏng chưa chứng minh được khả năng xử lý xung đột với hệ thống thật.

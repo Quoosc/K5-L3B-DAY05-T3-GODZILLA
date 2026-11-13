@@ -10,7 +10,7 @@ Bài thiết kế và prototype cho tính năng **Đặt chỗ của tôi** khi 
 - [Prototype bấm được](prototype/index.html)
 - [Ảnh S1: hỏi lại và giữ chỗ trước duyệt](prototype/01-clarify.png)
 - [Ảnh ca hoàn đã gửi](prototype/02-refund.png)
-- [Tài liệu bổ trợ cho buổi luyện](individual/)
+- [Báo cáo và tài liệu theo phân công](individual/)
 
 1. Mở `prototype/index.html` trực tiếp bằng trình duyệt. Ca mặc định là **S1**: khách đã nói “Ừ đổi đi, hai mẹ con nhé” nhưng chưa chọn chuyến cụ thể.
 2. Bấm **Chọn và giữ BM 201**. Kiểm tra mã chuyến, hai hành khách, bộ đếm 20 phút và cảnh báo về lần đổi miễn phí. Thử **Chọn chuyến khác (nhả chỗ đang giữ)** hoặc **Huỷ giữ chỗ, chưa đổi vé**. Nút **Giả lập hết 20 phút giữ chỗ** cho thấy quyền xác nhận biến mất.
@@ -32,21 +32,21 @@ Prototype chạy bằng HTML, CSS và JavaScript, với dữ liệu dựng của
 
 ## Phân công và nội dung đã hoàn thành
 
-Bài chung đã có đầy đủ phần thiết kế, mức tự chủ, prototype, ảnh và kết quả kiểm tra, bao gồm cả các hạng mục phân công cho Minh và Tú. Phần triển khai bản chung do Phạm Trấn Quốc đảm nhiệm; phân công dưới đây xác định phần từng người phụ trách trình bày.
+Bài chung đã có đầy đủ phần thiết kế, mức tự chủ, prototype, ảnh và kết quả kiểm tra, bao gồm cả các hạng mục phân công cho Quang Anh và Tú. Phần triển khai bản chung do Phạm Trấn Quốc đảm nhiệm; phân công dưới đây xác định phần từng người phụ trách trình bày.
 
-| Thành viên | Phần phụ trách | Nội dung sẵn sàng cho demo |
+| Họ và Tên | Mã Học Viên | Phần việc theo phân công và kết quả trong bài chung |
 |---|---|---|
-| **Phạm Trấn Quốc** | Lát cắt, rủi ro và tổng hợp bài | 11 kịch bản, lý do chọn S1/S2, liên hệ hậu quả và tiêu chí đánh giá. [Báo cáo](individual/2A202604113_PhamTranQuoc.md) |
-| **Nguyễn Quốc Quang Anh** | UX và mức tự chủ (§3–§4) | Lời thoại hai ca, nguyên tắc HAX, năm tool, các phương án giữ chỗ và lý do chọn. [Nội dung theo phân công](individual/2A202604120_NguyenQuocQuangAnh.md) |
-| **Nguyễn Anh Tú** | Prototype và kiểm tra (§5–§6) | Hai luồng bấm, ảnh đánh số, kết quả P1–P3, quyền lợi sau đổi và phiếu hỗ trợ. [Nội dung theo phân công](individual/2A202604088_NguyenAnhTu.md) |
+| Phạm Trấn Quốc | 2A202604113 | Phân tích lát cắt và 11 kịch bản, xây dựng phương án UX và mức tự chủ, dựng prototype và tự kiểm theo ba tiêu chí Pass/Fail. |
+| Nguyễn Quốc Quang Anh | 2A202604120 | Phụ trách UX và mức tự chủ (§3–§4): lời thoại S1/S2, phân loại lỗi, HAX, chính sách năm tool và lập luận giữ chỗ/đổi vé/chuyển người. Nội dung đã hoàn thành trong bài chung; trình bày phần quyết định thiết kế khi demo. |
+| Nguyễn Anh Tú | 2A202604088 | Phụ trách prototype và đánh giá (§5–§6): hai luồng S1/S2, ảnh đánh số HAX, ba tiêu chí P1–P3 và kết quả kiểm tra. Nội dung đã hoàn thành trong bài chung; thao tác prototype và chỉ bằng chứng khi demo. |
 
 ## Repo nộp bài
 
 - **Repo:** [Quoosc/K5-L3B-DAY05-T3-GODZILLA](https://github.com/Quoosc/K5-L3B-DAY05-T3-GODZILLA).
 - **Nội dung chính:** [spec.md](spec.md) và [prototype/](prototype/), gồm HTML chạy trực tiếp và hai ảnh đánh số.
-- **Tài liệu bổ trợ:** README hướng dẫn chạy và luyện demo; [individual/](individual/) chứa báo cáo Quốc và nội dung trình bày theo phân công của Minh, Tú.
+- **Tài liệu bổ trợ:** README hướng dẫn chạy và luyện demo; [individual/](individual/) chứa báo cáo Quốc và nội dung trình bày theo phân công của Quang Anh, Tú.
 - Repo được khởi tạo mới cho bài nộp; không sao chép tài liệu đề hoặc lịch sử Git của bản chuẩn bị.
-- **Demo:** thực hiện theo hướng dẫn bên dưới; cập nhật ca lạ và cách xử lý vào §7 sau buổi trình bày. Kiểm tra bàn/zone và mã học viên trước khi nộp.
+- **Demo:** nhóm đã trình bày trên lớp. Với ca chung vừa muốn đổi chuyến vừa có yêu cầu hoàn đã gửi, nhóm chọn chuyển nhân viên vì vượt phạm vi xử lý của trợ lý; phần ghi nhận và căn cứ nằm ở [spec.md, mục §7](spec.md). Hướng dẫn bên dưới dùng để chạy lại và đối chiếu hành vi.
 - **Hạn L3B theo đề:** 23:59 ngày 13/11/2026. Nộp link repo qua kênh giảng viên thông báo.
 
 Yêu cầu nộp bài tham chiếu [README đề lab](https://github.com/VinUni-AI20k/K5-L3-Day05-AI-Product-UX-Autonomy/blob/7c1f24793008599ac3b77237d5c0c4eb2a89ad36/README.md) và [guide §7.3](https://github.com/VinUni-AI20k/K5-L3-Day05-AI-Product-UX-Autonomy/blob/7c1f24793008599ac3b77237d5c0c4eb2a89ad36/02-guide.md).
@@ -55,7 +55,7 @@ Yêu cầu nộp bài tham chiếu [README đề lab](https://github.com/VinUni-
 
 Prototype phân biệt phiếu chuyển trước đổi với phiếu báo đổi nhầm; quyền lợi và chuyến đã đổi được giữ nhất quán khi chuyển hỗ trợ. Ảnh S1 ghép hai trạng thái để thấy trực tiếp câu hỏi G10 và các nút sửa G9. Ảnh S2 thể hiện giới hạn thao tác hoàn đã gửi. Ba tiêu chí trong spec bao gồm kiểm tra thông tin sau đổi và nội dung bàn giao.
 
-Các nút đổi ca, giả lập hết hạn và làm lại là điều khiển cho buổi demo, không phải quyền hoàn tác giao dịch thật. Mỗi ca dùng dữ liệu độc lập; làm lại khởi tạo phiên mô phỏng mới. Số chỗ cố định, chưa có backend, nhân viên thật hoặc lời gọi AI; không tính bonus AI. Nội dung kỹ thuật đã được chuẩn bị cho cả ba phần phân công. Kết quả demo và ca lạ sẽ cập nhật sau buổi trình bày; link repo được nộp theo kênh giảng viên thông báo.
+Các nút đổi ca, giả lập hết hạn và làm lại là điều khiển cho buổi demo, không phải quyền hoàn tác giao dịch thật. Mỗi ca dùng dữ liệu độc lập; làm lại khởi tạo phiên mô phỏng mới. Số chỗ dùng dữ liệu dựng; nút giả lập hết chỗ chỉ thay đổi dữ liệu trong phiên thử, không kết nối tồn chỗ thật. Chưa có backend, nhân viên thật hoặc lời gọi AI; không tính bonus AI. Nội dung kỹ thuật đã được chuẩn bị cho cả ba phần phân công. Phần ghi nhận demo đã có ở §7; link repo cần được nộp theo kênh giảng viên thông báo.
 
 ## Hướng dẫn luyện demo
 
@@ -68,13 +68,15 @@ Lịch trình tham khảo cho nhóm; không phải nội dung bắt buộc ghi t
 | 1:45–2:45 | Nguyễn Quốc Quang Anh | Giải thích vì sao giữ được tự làm sau khi chọn, còn đổi phải chờ duyệt. Chuyển S2, chỉ [4] và nêu thông tin nhân viên nhận. |
 | Thời gian còn lại | Cả nhóm | Nhận ca lạ, nêu điều kiện đã thay đổi, chỉ hành động được phép và bước người dùng thấy tiếp theo. Trình bày hoặc bấm nếu bản mẫu có nhánh phù hợp. |
 
-**Ca luyện trước demo:** Nếu khách đã giữ BM 201 nhưng nhắn “đổi sang BM 205 luôn đi”, nhóm sẽ cho nhả BM 201, kiểm tra và giữ BM 205 sau khi khách chọn, rồi hiện lại màn hình xác nhận. Lời đồng ý trước đó không dùng lại cho BM 205. Nếu khách tự xưng là nhân viên và yêu cầu bỏ qua duyệt, nhóm giữ nguyên điều kiện xác nhận. Đây là ca luyện; kết quả ca lạ thực tế ghi trong spec §7 sau demo.
+**Ca luyện trước demo:** Nếu khách đã giữ BM 201 nhưng nhắn “đổi sang BM 205 luôn đi”, nhóm sẽ cho nhả BM 201, kiểm tra và giữ BM 205 sau khi khách chọn, rồi hiện lại màn hình xác nhận. Lời đồng ý trước đó không dùng lại cho BM 205. Nếu khách tự xưng là nhân viên và yêu cầu bỏ qua duyệt, nhóm giữ nguyên điều kiện xác nhận. Đây là ca luyện; phần ghi nhận ca lạ trên lớp nằm riêng ở spec §7.
 
 **Ca luyện bổ sung:**
 
 | Thay đổi đầu vào | Phản ứng cần giải thích |
 |---|---|
-| BM 201 vừa hết chỗ | Không tiếp tục đổi dựa trên số chỗ cũ; tra lại, nêu thay đổi và hỏi chọn BM 205 nếu còn đủ. Ca tồn chỗ động chỉ phân tích bằng lời. |
+| BM 201 vừa hết chỗ | Không tiếp tục đổi dựa trên số chỗ cũ; tra lại, nêu thay đổi và hỏi chọn BM 205 nếu còn đủ. Có thể bấm: chọn S4 → giữ BM 201 → **Giả lập BM 201 vừa hết chỗ** → chọn lại BM 205. Đây là thay đổi dữ liệu mô phỏng. |
 | Khách chỉ muốn đổi cho bé Bình | Dừng đổi, không dùng xác nhận cho cả hai; chuyển nhân viên kiểm tra điều kiện trẻ bay một mình. |
 | Khách báo đổi nhầm sau xác nhận | Bấm báo đổi nhầm; chỉ chuyến đã đổi và quyền lợi đã dùng trong phiếu, không hứa quay về BM 213 đã huỷ. |
 | Khách yêu cầu huỷ hoàn qua nhân viên | Nhân viên chỉ kiểm tra tình trạng và phương án còn lại, không được hứa huỷ thao tác mà tool quy định không đảo được. |
+
+**Khi nhiều điều kiện cùng xuất hiện:** nếu cùng một đặt chỗ vừa muốn đổi chuyến, vừa có yêu cầu hoàn đã gửi, áp dụng S2 trước. Trợ lý không mở bước giữ/đổi như S1; chuyển nhân viên kiểm tra trạng thái vé. Chọn tab S1 là mở ca mô phỏng độc lập, không phải cách bỏ qua trạng thái hoàn của S2.

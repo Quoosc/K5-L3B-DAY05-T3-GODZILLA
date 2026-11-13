@@ -73,7 +73,7 @@ Với từng tool, tôi đặt ba câu hỏi. **Ai chịu thiệt nếu AI làm 
 | `gui_yeu_cau_hoan_ve` | Cần khách xác nhận và nhân viên kiểm tra | Gửi rồi không rút được. Fixture thiếu số tiền và phương thức nhận, nên AI chưa đủ căn cứ để tự gửi hoặc tạo màn hình xác nhận đầy đủ. |
 | `chuyen_nhan_vien` | Tự làm | Chuyển thừa tốn thời gian xử lý; không chuyển ca vượt quyền AI có thể gây thiệt hại lớn hơn. |
 
-Tool khó xếp nhất đối với tôi là **`giu_cho_chuyen_moi`**. Tự giữ ngay khi nghe “đổi đi” có thể chiếm sai chỗ. Luôn chờ nhân viên có thể làm BM 201 hoặc BM 205 hết chỗ. Tôi chọn ranh giới ở **lựa chọn mã chuyến cụ thể của khách**. Với S1, AI chưa giữ khi khách chưa chọn. Với S4, BM 217 không đủ chỗ nên không hiện như lựa chọn bấm được. Bảng năm tool cùng các phương án cho tool khó nhất đã được tổng hợp trong bài chung để Minh giải thích quyết định và Tú chỉ hành vi tương ứng trên prototype.
+Tool khó xếp nhất đối với tôi là **`giu_cho_chuyen_moi`**. Tự giữ ngay khi nghe “đổi đi” có thể chiếm sai chỗ. Luôn chờ nhân viên có thể làm BM 201 hoặc BM 205 hết chỗ. Tôi chọn ranh giới ở **lựa chọn mã chuyến cụ thể của khách**. Với S1, AI chưa giữ khi khách chưa chọn. Với S4, BM 217 không đủ chỗ nên không hiện như lựa chọn bấm được. Bảng năm tool cùng các phương án cho tool khó nhất đã được tổng hợp trong bài chung để Quang Anh giải thích quyết định và Tú chỉ hành vi tương ứng trên prototype.
 
 Tôi thử chính sách trên S1, S2 và S3 bình thường. S1 không gọi đổi vé trước khi khách duyệt. S2 không tạo thêm yêu cầu hoàn hoặc đổi vé, chỉ mở đường chuyển người. S3 đọc đặt chỗ để trả lời ngay rằng chuyến gốc 19:00 đã huỷ. Như vậy, lời hứa với khách được diễn đạt chính xác hơn: **trợ lý có thể giữ chỗ sau khi khách chọn; đổi vé chỉ diễn ra sau khi khách duyệt bản tóm tắt**.
 
@@ -98,7 +98,7 @@ Bản mẫu được kiểm tra bằng Chrome. Bảng dưới ghi các trạng t
 | P3 · Chuyển nhân viên trước khi đổi | Giữ BM 201 rồi bấm “Chuyển nhân viên” tại màn hình duyệt. | Trước khi bấm có cảnh báo lần đổi miễn phí. Phiếu giữ lại mã chuyến liên quan, lượt giữ tạm kết thúc và chưa phát sinh đổi. |
 | P3 · Phục hồi sau thao tác khó đảo | Xác nhận đổi rồi bấm “Báo đổi nhầm”. Ở ca S2, bấm “Chuyển nhân viên”. | S1 có đường hỗ trợ mà không cam kết khôi phục lần đổi. S2 có phiếu ghi TRV-7Q2K và trạng thái hoàn đã gửi. |
 
-Số chỗ và trạng thái hoàn trong prototype là dữ liệu cố định. Một sản phẩm thật phải tra lại chỗ ở thời điểm khách bấm xác nhận và xử lý trường hợp chỗ vừa hết. Fixture thiếu số tiền và phương thức nhận hoàn, nên tôi không dựng luồng gửi hoàn mới như thể đã đủ căn cứ. Prototype không có lời gọi AI thật hoặc API key. Ca lạ do TA hoặc giảng viên đưa ra sẽ được ghi vào bài chung sau demo thực tế.
+Số chỗ và trạng thái hoàn trong prototype là dữ liệu cố định. Một sản phẩm thật phải tra lại chỗ ở thời điểm khách bấm xác nhận và xử lý trường hợp chỗ vừa hết. Fixture thiếu số tiền và phương thức nhận hoàn, nên tôi không dựng luồng gửi hoàn mới như thể đã đủ căn cứ. Prototype không có lời gọi AI thật hoặc API key. Nhóm đã demo trên lớp; phần ghi nhận ca lạ nằm ở §7 của bài chung.
 
 ### Các điểm sửa sau vòng review
 
@@ -106,10 +106,22 @@ Số chỗ và trạng thái hoàn trong prototype là dữ liệu cố định.
 
 Kiểm tra lại bằng hai đường bấm cùng chọn BM 201 nhưng chuyển hỗ trợ ở hai thời điểm khác nhau cho thấy phiếu đã phân biệt đúng. Lỗi này cho thấy chỉ kiểm tra “có nút chuyển người” chưa đủ: P3 cần kiểm tra cả thông tin người tiếp nhận nhìn thấy. P2 cũng được bổ sung điều kiện quyền lợi sau đổi. Bảng HAX được sửa định dạng; S3 và S8 được nâng mức hại vì thông tin sai có thể khiến khách lỡ chuyến hoặc bị từ chối vận chuyển.
 
-Việc soạn và chỉnh prototype có hỗ trợ của công cụ AI. Các kết quả mô phỏng được đối chiếu với dữ liệu của đề; không coi đó là kết quả vận hành với hãng bay thật. Nội dung theo phân công cho Minh và Tú đã được chuẩn bị trong bài chung và tài liệu trình bày tương ứng.
+Việc soạn và chỉnh prototype có hỗ trợ của công cụ AI. Các kết quả mô phỏng được đối chiếu với dữ liệu của đề; không coi đó là kết quả vận hành với hãng bay thật. Nội dung theo phân công cho Quang Anh và Tú đã được chuẩn bị trong bài chung và tài liệu trình bày tương ứng.
 
 ## 8. Điều tôi rút ra
 
 Một câu trả lời nghe hợp lý vẫn có thể dẫn đến hành động sai nếu hệ thống không kiểm tra ý định và quyền thực hiện. Với “đổi đi”, **đúng mã chuyến và đúng hai hành khách** quan trọng hơn việc AI đoán nhanh. Giữ chỗ là thao tác tạm thời có thể tự nhả nên được phép sau khi khách chọn; đổi vé dùng một quyền lợi chỉ có một lần nên cần duyệt rõ. Tôi dùng cùng tiêu chí hậu quả để đặt hai hành động vào hai mức tự chủ khác nhau.
 
 Khi dựng màn hình, tôi phát hiện chỗ `spec.md` nói “chuyển nhân viên” cần có nút bấm thực tế. Bản hiện tại có đường chuyển ở bước hỏi lại, bước giữ chỗ, bước hết hạn và ca hoàn đã gửi. Đây là bằng chứng tôi có thể chỉ trực tiếp khi giải thích quyết định thiết kế cho người chấm.
+
+## 9. Rà soát sau demo và làm rõ điều kiện chuyển luồng
+
+Bản ghi demo đặt cạnh nhau hai vấn đề: khách chưa chọn chuyến rõ ràng và đã gửi yêu cầu hoàn. Khi rà soát, tôi làm rõ thứ tự xử lý trong §4 và §7: đây là cùng một đặt chỗ nên trạng thái hoàn đã gửi có ưu tiên cao hơn lời đồng ý đổi chuyến. Việc khách chọn đúng mã chuyến chỉ giải quyết sự mơ hồ của S1, không chứng minh vé còn được đổi sau khi gửi hoàn.
+
+Vì vậy, ca kết hợp phải đi theo S2: nêu yêu cầu hoàn không thể huỷ, chưa khẳng định khả năng đổi vé, rồi chuyển nhân viên cùng mã đặt chỗ, hai hành khách, thời điểm gửi hoàn và mong muốn đổi chuyến. S1 chỉ dùng cho ca riêng đủ điều kiện đổi. Tôi ghi rõ việc chuyển tab trong prototype khởi tạo ca thử độc lập, không phải thao tác xoá trạng thái hoàn của giao dịch.
+
+Lần rà soát này cũng đồng bộ tên Quang Anh trong phân công, mô tả 11 tình huống và hướng dẫn thử hết chỗ bằng nút giả lập. Nội dung bổ sung là kết quả rà soát bài nộp, tách khỏi phần ghi nhận những gì nhóm đã trình bày trên lớp.
+
+Cả ba thành viên cùng chọn mức 1 — tự làm cho tool giữ chỗ. Tôi bổ sung ghi nhận này vào §4 cùng giới hạn áp dụng: tự làm sau khi khách chọn đúng chuyến, đủ chỗ và trạng thái vé cho phép. Sự thống nhất về mức không thay thế việc giải thích vì sao không được giữ trong ca hoàn đã gửi.
+
+Phần trả lời của nhóm ở demo là chuyển nhân viên đối với ca vượt phạm vi xử lý của trợ lý. Tôi đã đối chiếu nguyên tắc này với ca chung đã gửi hoàn: trợ lý dừng giữ/đổi và bàn giao trạng thái để nhân viên kiểm tra. Nội dung §7 được chỉnh để thể hiện quyết định đó, tránh hiểu hai luồng minh hoạ S1 và S2 là một chuỗi thao tác trên cùng đặt chỗ.

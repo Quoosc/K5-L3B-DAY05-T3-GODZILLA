@@ -32,4 +32,8 @@ Các kết quả bên dưới là kết quả kiểm tra của bản prototype h
 
 ## Bằng chứng cho phần trình bày
 
-Nội dung theo phân công của Nguyễn Anh Tú đã có trong bài chung, với lập luận, đường bấm và bằng chứng nêu ở trên. Tài liệu này tổng hợp phần được phân công để sử dụng khi demo; không ghi thay trải nghiệm hoặc ý kiến cá nhân chưa được cung cấp. Kết quả ca lạ được cập nhật chung tại §7 sau demo.
+Nội dung theo phân công của Nguyễn Anh Tú đã có trong bài chung, với lập luận, đường bấm và bằng chứng nêu ở trên. Tài liệu này tổng hợp phần được phân công để sử dụng khi demo; không ghi thay trải nghiệm hoặc ý kiến cá nhân chưa được cung cấp. Phần ghi nhận ca lạ nằm ở §7 của bài chung.
+
+**Đối chiếu ca có nhiều điều kiện:** nếu đặt chỗ đã gửi yêu cầu hoàn, dù khách muốn đổi và chưa chọn rõ chuyến, áp dụng S2 trước: không giữ/đổi, không rút hoặc gửi lại yêu cầu hoàn; chuyển nhân viên xác minh. S1 là ca độc lập còn đủ điều kiện đổi. Quy tắc và cách chạy lại nằm ở §4 và §7 của bài chung.
+
+**Lựa chọn ban đầu cho tool khó nhất:** mức 1 — tự làm với `giu_cho_chuyen_moi`, cùng mức với hai thành viên còn lại, theo thông tin Quốc bổ sung khi rà soát. Phương án cuối của bài giới hạn tự giữ ở ca đã chọn rõ chuyến, đủ chỗ và trạng thái vé cho phép; đổi vé vẫn phải duyệt riêng. Bảng ghi nhận chung ở §4.
