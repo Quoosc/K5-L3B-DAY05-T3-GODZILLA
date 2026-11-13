@@ -13,7 +13,7 @@
 
 Tôi chuẩn bị bản bài chung của Lab 5 từ lát cắt T3. Tôi phân tích dữ liệu đặt chỗ và năm tool được phát, xác định phạm vi tính năng, viết 11 kịch bản rủi ro, chọn hai ca có hậu quả nặng nhất, thiết kế lời AI và đường xử lý khi sai, đề xuất mức tự chủ cho từng tool, dựng prototype HTML và viết ba tiêu chí Pass/Fail. Tôi đối chiếu các quyết định với [đề track T3](https://github.com/VinUni-AI20k/K5-L3-Day05-AI-Product-UX-Autonomy/blob/7c1f24793008599ac3b77237d5c0c4eb2a89ad36/tracks/t3-travel.md) và [rubric](https://github.com/VinUni-AI20k/K5-L3-Day05-AI-Product-UX-Autonomy/blob/7c1f24793008599ac3b77237d5c0c4eb2a89ad36/04-rubric.md), rồi kiểm tra luồng bấm của prototype.
 
-Theo phân công trình bày, tôi giới thiệu lát cắt, phân tích rủi ro và tiêu chí đánh giá. Tôi đã chuẩn bị các phần UX, mức tự chủ và prototype trong bài chung để nhóm rà soát và trình bày. Báo cáo này mô tả phần tôi trực tiếp xây dựng. Hoàng Minh phụ trách trình bày UX và mức tự chủ; Nguyễn Anh Tú phụ trách thao tác prototype và bằng chứng kiểm tra.
+Theo phân công trình bày, tôi giới thiệu lát cắt, phân tích rủi ro và tiêu chí đánh giá. Tôi đã chuẩn bị các phần UX, mức tự chủ và prototype trong bài chung để nhóm rà soát và trình bày. Báo cáo này mô tả phần tôi trực tiếp xây dựng. Nguyễn Quốc Quang Anh phụ trách trình bày UX và mức tự chủ; Nguyễn Anh Tú phụ trách thao tác prototype và bằng chứng kiểm tra.
 
 | Hạng mục | Kết quả đã bàn giao | Nơi đối chiếu |
 |---|---|---|
