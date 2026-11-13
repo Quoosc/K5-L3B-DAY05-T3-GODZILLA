@@ -17,6 +17,8 @@ Bài thiết kế và prototype cho tính năng **Đặt chỗ của tôi** khi 
 3. Chọn lại chuyến rồi bấm **Xác nhận đổi cho cả hai**. Nếu bấm **Báo đổi nhầm · Chuyển nhân viên**, bản mẫu hiển thị phiếu ghi chuyến đã đổi và lần miễn phí đã dùng, không tự đổi lần nữa. Kiểm tra cột quyền lợi cũng đã cập nhật.
 4. Mở **Ca khác: Hoàn đã gửi** để thử **S2**. Kiểm tra cảnh báo không thể huỷ yêu cầu hoàn đã gửi và bấm **Chuyển nhân viên** để thấy phiếu có mã đặt chỗ cùng trạng thái yêu cầu.
 
+**Thử thêm trong cùng giao diện:** dùng mục **Tình huống demo** để chọn S3–S11. S4 cho thấy BM 217 bị khoá vì chỉ còn một chỗ; sau khi giữ BM 201 hoặc BM 205 có thể bấm **Giả lập chuyến vừa hết chỗ** để xem trợ lý huỷ xác nhận cũ và yêu cầu chọn lại. S6/S8/S9 chỉ cho chuyển hỗ trợ khi thiếu dữ kiện hoặc quyền; S10 không bỏ qua xác nhận; S11 cho thấy phiếu khi khách báo đổi nhầm. Các nhánh dùng dữ liệu và lời thoại dựng sẵn, không nhận câu hỏi tự do.
+
 Prototype chạy bằng HTML, CSS và JavaScript, với dữ liệu dựng của track T3. Giữ chỗ, đổi vé và tạo phiếu hỗ trợ đều là mô phỏng. Có thể mở file trực tiếp, không cần tài khoản, máy chủ hay API key.
 
 ## Đọc bằng chứng trong spec

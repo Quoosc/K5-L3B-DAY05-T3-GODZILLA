@@ -14,6 +14,8 @@ Prototype và hai ảnh đã có. Đọc [spec.md §5–§6](../spec.md) và [h�
 
 **Ý chính để trình bày:** cho người xem thấy khác biệt giữa chọn chuyến, giữ chỗ tạm và xác nhận đổi. Nếu ca lạ nằm ngoài hai màn hình đã dựng, giải thích trợ lý được làm gì theo §4 và bước tiếp theo mà khách sẽ thấy.
 
+**Ca có thể bấm thêm:** mục **Tình huống demo** chứa S3–S11. Có thể chọn S4 để chỉ BM 217 bị khoá, giữ BM 201 rồi giả lập chuyến hết chỗ để thấy nút duyệt biến mất; chọn S6/S8/S9 để chỉ đường chuyển nhân viên; S10 để chỉ bước duyệt không bị bỏ qua; S11 để chỉ phiếu báo đổi nhầm. Nếu ca do giảng viên đưa không trùng tình huống dựng sẵn, giải thích theo chính sách §4 và nêu giới hạn của bản mẫu.
+
 Các kết quả bên dưới là kết quả kiểm tra của bản prototype hiện tại, kèm thao tác để tái hiện khi demo.
 
 ## Kết quả kiểm tra prototype

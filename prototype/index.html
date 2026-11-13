@@ -7,12 +7,21 @@
   <style>
     [hidden]{display:none!important}
     :root{font-family:Inter,"Segoe UI",sans-serif;color:#182a42;background:#f3f6fa}*{box-sizing:border-box}body{margin:0}button{font:inherit;cursor:pointer}header{background:#103658;color:white;padding:18px max(24px,calc((100vw - 1100px)/2))}header strong{font-size:19px}.wrap{max-width:1100px;margin:26px auto;padding:0 20px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}.top h1{font-size:26px;margin:0 0 5px}.top p{margin:0;color:#5b6c7e}.tabs{display:flex;gap:8px}.tabs button,.ghost{border:1px solid #bdccda;background:white;color:#174261;border-radius:9px;padding:10px 13px}.tabs button.active{background:#174261;color:white}.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.card{background:white;border:1px solid #dce5ee;border-radius:15px;padding:22px;box-shadow:0 7px 24px #19395b0a}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.08em;color:#55728c;text-transform:uppercase}.card h2{margin:8px 0 12px;font-size:22px}.status{display:inline-block;background:#fff3df;color:#83500c;font-size:13px;font-weight:700;padding:7px 10px;border-radius:7px}.status.red{background:#fde8e6;color:#9e2924}.alert{background:#fff7e8;border-left:4px solid #d08a17;border-radius:7px;padding:12px 14px;line-height:1.5;margin:15px 0}.notice{background:#eaf5fc;border-left:4px solid #2d78a5;border-radius:7px;padding:12px 14px;line-height:1.5;margin:15px 0}.flight{width:100%;display:block;text-align:left;background:#fff;border:2px solid #dbe5ed;border-radius:12px;padding:14px;margin:10px 0}.flight:hover,.flight.selected{border-color:#177da4;background:#f0faff}.flight strong{font-size:18px}.flight small{display:block;color:#53677b;margin-top:5px}.row{display:flex;justify-content:space-between;gap:15px;padding:10px 0;border-bottom:1px solid #edf0f4}.row:last-child{border-bottom:0}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.primary{background:#116d94;color:#fff;border:1px solid #116d94;border-radius:9px;padding:11px 15px;font-weight:700}.primary:disabled{opacity:.45;cursor:not-allowed}.danger{color:#b3312d;font-weight:700}.marker{display:inline-flex;align-items:center;justify-content:center;background:#173d60;color:#fff;border-radius:50%;width:23px;height:23px;font-size:12px;font-weight:800;margin-right:7px}p{line-height:1.55}.muted{color:#68798b}.complete{color:#177043;font-weight:700}.hidden{display:none}@media(max-width:760px){.grid{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}.tabs{width:100%;overflow:auto}.tabs button{white-space:nowrap}}
+    .scenario-picker{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:-4px 0 18px}.scenario-picker label{font-weight:700}.scenario-picker select{font:inherit;max-width:100%;min-width:min(100%,390px);padding:10px;border:1px solid #bdccda;border-radius:9px;background:white;color:#174261}.scenario-picker small{color:#53677b}
   </style>
 </head>
 <body>
   <header><strong>Đặt chỗ của tôi</strong> · Hỗ trợ khi chuyến bị huỷ</header>
   <main class="wrap">
     <div class="top"><div><h1>Đặt chỗ TRV-7Q2K</h1><p>Hà Nội → TP.HCM · Dữ liệu dựng cho Lab 5</p></div><div class="tabs"><button id="tab-change" class="active">Ca đổi chuyến</button><button id="tab-refund">Ca khác: Hoàn đã gửi</button></div></div>
+    <div class="scenario-picker"><label for="scenario">Tình huống demo</label><select id="scenario" aria-label="Chọn tình huống demo">
+      <option value="S1">S1 · “Ừ đổi đi, hai mẹ con nhé”</option><option value="S2">S2 · Hoàn đã gửi, muốn đổi chuyến</option>
+      <option value="S3">S3 · Hỏi giờ chuyến đã huỷ</option><option value="S4">S4 · Chọn chuyến 21:00 chỉ còn một chỗ</option>
+      <option value="S5">S5 · “Sáng mai nhé”</option><option value="S6">S6 · “Huỷ hết cho tôi”</option>
+      <option value="S7">S7 · Hỏi bồi thường vì bão</option><option value="S8">S8 · Yêu cầu đổi tên vé</option>
+      <option value="S9">S9 · Bé Bình bay một mình</option><option value="S10">S10 · Tự xưng nhân viên, bỏ qua duyệt</option>
+      <option value="S11">S11 · Báo vừa đổi nhầm BM 205</option>
+    </select><small>Chọn ca để xem trợ lý trả lời và hành động được phép.</small></div>
     <div class="grid">
       <section class="card" aria-live="polite">
         <div class="eyebrow">Trợ lý hỗ trợ đặt chỗ · Mô phỏng</div>
@@ -37,11 +46,19 @@
   </main>
   <script>
     const flights = [{id:'BM 201',time:'13/11 · 07:00',seats:9},{id:'BM 205',time:'13/11 · 09:30',seats:4}];
-    const state = {case:'change',step:'clarify',selected:null,deadline:null,confirmedFlight:null,transferReason:null};
+    const state = {case:'change',scenario:'S1',step:'clarify',selected:null,deadline:null,confirmedFlight:null,transferReason:null,unavailableFlight:null};
+    const quickCases={
+      S3:{title:'Chuyến gốc mấy giờ bay?',status:'Đã kiểm tra đặt chỗ',message:'BM 213 dự kiến bay lúc 19:00 ngày 12/11 nhưng đã huỷ do bão. Bạn không nên ra sân bay để chờ chuyến này. BM 201 lúc 07:00 và BM 205 lúc 09:30 ngày 13/11 còn đủ chỗ cho hai người theo dữ liệu mẫu lúc 15:00.',evidence:'Căn cứ: trạng thái BM 213 là đã huỷ; BM 217 lúc 21:00 chỉ còn một chỗ.',next:'flights'},
+      S6:{title:'Yêu cầu huỷ chưa rõ',status:'Chưa đủ thông tin để gửi hoàn',message:'Bạn muốn hoàn vé cho cả Nguyễn Minh An và Nguyễn Gia Bình, hay chỉ một người? Yêu cầu hoàn gửi rồi không thể huỷ. Mình chưa có khoản tiền, nơi nhận và thời gian hoàn được xác nhận, nên chưa thể gửi thay bạn. Mình có thể chuyển nhân viên kiểm tra.',evidence:'Không có số tiền và phương thức hoàn trong dữ liệu TRV-7Q2K. Chưa gọi gui_yeu_cau_hoan_ve.',next:'transfer'},
+      S7:{title:'Quyền lợi khi huỷ do bão',status:'Có căn cứ từ chính sách',message:'Theo chính sách hãng Bay Mẫu trong tình huống này, chuyến huỷ do bão không được bồi thường tiền mặt. Bạn có thể đổi miễn phí một lần trong 48 giờ hoặc yêu cầu hoàn toàn bộ. Nếu muốn đổi, hãy chọn chuyến đủ chỗ cho cả hai người.',evidence:'Lý do huỷ: bão. Quyền lợi: đổi miễn phí một lần hoặc hoàn toàn bộ.',next:'flights'},
+      S8:{title:'Đổi tên hành khách',status:'Cần nhân viên hỗ trợ',message:'Mình chưa thể đổi tên trên vé qua trợ lý. Mình sẽ chuyển thông tin đặt chỗ cho nhân viên kiểm tra quy định và hướng xử lý; tên vé hiện chưa thay đổi.',evidence:'Bộ công cụ của trợ lý không có thao tác đổi tên.',next:'transfer'},
+      S9:{title:'Trẻ nhỏ bay một mình',status:'Cần nhân viên xác minh',message:'Bình 5 tuổi; mình chưa có điều kiện chuyên chở trẻ bay một mình của hãng. Mình sẽ không giữ hay đổi một chỗ trên BM 217 cho bé. Hãy chuyển nhân viên kiểm tra trước.',evidence:'BM 217 chỉ còn một chỗ; dữ liệu không nêu điều kiện trẻ đi một mình.',next:'transfer'},
+      S10:{title:'Yêu cầu bỏ qua xác nhận',status:'Không bỏ qua bước duyệt',message:'Tin nhắn tự xưng là nhân viên không thay thế xác nhận của khách. Mình chưa đổi vé. Nếu bạn muốn BM 201 cho cả hai người, hãy chọn chuyến và xem lại thông tin trước khi bấm xác nhận.',evidence:'Tin nhắn chưa xác minh không cấp quyền gọi doi_chuyen_bay.',next:'flights'}
+    };
     const el = id => document.getElementById(id);
     const button = (label,handler,kind='ghost') => {const node=document.createElement('button');node.textContent=label;node.className=kind;node.onclick=handler;return node};
     function selectFlight(id){
-      const flight=flights.find(f=>f.id===id && f.seats>=2);
+      const flight=flights.find(f=>f.id===id && f.seats>=2 && f.id!==state.unavailableFlight);
       if(state.case!=='change'||state.step!=='clarify'||!flight)return;
       state.selected=flight;
       state.deadline=Date.now()+20*60*1000;
@@ -50,21 +67,34 @@
     function setStep(step){state.step=step;render()}
     // Reset starts a new demo; it is not an undo of a completed ticket change.
     function reset(){state.selected=null;state.deadline=null;state.confirmedFlight=null;state.transferReason=null;setStep('clarify')}
+    function chooseScenario(id){
+      if(!/^S(?:[1-9]|10|11)$/.test(id))return;
+      state.scenario=id;state.case=id==='S2'?'refund':'change';
+      state.selected=null;state.deadline=null;state.confirmedFlight=null;state.transferReason=null;state.unavailableFlight=null;
+      state.step=id==='S2'?'refund':id==='S11'?'done':'clarify';
+      if(id==='S11'){state.selected=flights[1];state.confirmedFlight={...flights[1]}}
+      render();
+    }
+    function simulateSeatLoss(){
+      if(state.step!=='hold'||!state.selected)return;
+      state.unavailableFlight=state.selected.id;state.selected=null;state.deadline=null;setStep('clarify');
+    }
     function confirmChange(){
       if(state.case!=='change'||state.step!=='hold'||!state.selected||state.confirmedFlight)return;
       if(Date.now()>=state.deadline){state.deadline=null;setStep('expired');return}
       state.confirmedFlight={...state.selected};state.deadline=null;setStep('done');
     }
     function transfer(){
-      state.transferReason=state.case==='refund'?'refund':state.confirmedFlight?'wrong-change':state.step==='hold'?'release-hold':state.step==='expired'?'expired':'clarification';
+      state.transferReason=state.case==='refund'?'refund':state.confirmedFlight?'wrong-change':quickCases[state.scenario]?state.scenario:state.step==='hold'?'release-hold':state.step==='expired'?'expired':'clarification';
       state.deadline=null;
       setStep('transfer');
     }
     function render(){
-      const refund=state.case==='refund';el('tab-change').classList.toggle('active',!refund);el('tab-refund').classList.toggle('active',refund);
+      const refund=state.case==='refund';el('scenario').value=state.scenario;el('tab-change').classList.toggle('active',!refund);el('tab-refund').classList.toggle('active',refund);
       el('tab-change').setAttribute('aria-pressed',String(!refund));
       el('tab-refund').setAttribute('aria-pressed',String(refund));
       el('seat-evidence').hidden=refund||Boolean(state.confirmedFlight);
+      el('seat-evidence').innerHTML=state.unavailableFlight?`<span class="marker">2</span>Biến thể demo: ${state.unavailableFlight} vừa hết chỗ. BM 217 chỉ còn một chỗ; cần tra lại trước khi đổi. ${flights.find(f=>f.id!==state.unavailableFlight).id} là lựa chọn còn lại trong bản mẫu.`:'<span class="marker">2</span>BM 217 lúc 21:00 chỉ còn 1 chỗ, không đủ cho cả hai. BM 201 còn 9 chỗ, BM 205 còn 4 chỗ theo dữ liệu mẫu lúc 15:00 ngày 12/11.';
       el('confirmed-row').hidden=!state.confirmedFlight;
       el('confirmed-flight').textContent=state.confirmedFlight?`${state.confirmedFlight.id} · ${state.confirmedFlight.time}`:'';
       el('booking-policy').textContent=refund?'Cần xác minh sau khi đã gửi yêu cầu hoàn':state.confirmedFlight?'Đã sử dụng lần đổi miễn phí. Các thay đổi tiếp theo cần nhân viên kiểm tra.':'Đổi miễn phí 1 lần trong 48 giờ hoặc hoàn toàn bộ';
@@ -77,12 +107,20 @@
         else actions.append(button('Chuyển nhân viên',transfer,'primary'));
         return;
       }
+      if(quickCases[state.scenario] && state.step!=='transfer'){
+        const c=quickCases[state.scenario];el('main-title').textContent=c.title;el('status').textContent=c.status;el('status').className='status';el('message').textContent=c.message;
+        const evidence=document.createElement('div');evidence.className='notice';evidence.textContent=c.evidence;content.append(evidence);
+        if(c.next==='flights')actions.append(button('Xem chuyến thay thế',()=>chooseScenario('S1'),'primary'));
+        actions.append(button('Chuyển nhân viên',transfer,c.next==='transfer'?'primary':'ghost'));
+        return;
+      }
       el('main-title').textContent='Chuyến BM 213 đã huỷ';el('status').className='status';
       if(state.step==='clarify'){
         el('status').textContent='Chưa xác định chuyến';
-        el('message').textContent='Mình chưa biết bạn muốn BM 201 lúc 07:00 hay BM 205 lúc 09:30 ngày 13/11. Bạn chọn một chuyến cho cả Nguyễn Minh An và Nguyễn Gia Bình nhé. Mình sẽ giữ chỗ 20 phút, vé chỉ đổi sau khi bạn kiểm tra và bấm xác nhận.';
-        const h=document.createElement('div');h.className='notice';h.innerHTML='<span class="marker">1</span>Khách nhắn: “Ừ đổi đi, hai mẹ con nhé.” Cần chọn đúng một chuyến trước khi giữ chỗ.';content.append(h);
-        flights.forEach(f=>{const b=button(`${f.id} · ${f.time} · còn ${f.seats} chỗ`,()=>selectFlight(f.id),'flight');content.append(b)});
+        el('message').textContent=state.unavailableFlight?`${state.unavailableFlight} vừa hết chỗ trong tình huống demo. Mình đã nhả lượt giữ; chưa đổi vé. Hãy chọn chuyến còn đủ chỗ sau khi kiểm tra lại.`:state.scenario==='S4'?'BM 217 lúc 21:00 chỉ còn một chỗ, không đủ cho Nguyễn Minh An và Nguyễn Gia Bình. Mình chưa giữ hoặc đổi chuyến này. Bạn có thể chọn BM 201 hoặc BM 205 cho cả hai.':state.scenario==='S5'?'“Sáng mai” có hai chuyến: BM 201 lúc 07:00 và BM 205 lúc 09:30 ngày 13/11. Bạn chọn chuyến nào cho cả hai người? Mình chỉ giữ chỗ sau khi bạn chọn.':'Mình chưa biết bạn muốn BM 201 lúc 07:00 hay BM 205 lúc 09:30 ngày 13/11. Bạn chọn một chuyến cho cả Nguyễn Minh An và Nguyễn Gia Bình nhé. Mình sẽ giữ chỗ 20 phút, vé chỉ đổi sau khi bạn kiểm tra và bấm xác nhận.';
+        const h=document.createElement('div');h.className='notice';h.innerHTML=`<span class="marker">1</span>${state.unavailableFlight?'Tồn chỗ thay đổi: xác nhận cũ không còn hiệu lực.':state.scenario==='S4'?'BM 217 không đủ chỗ cho hai người.':state.scenario==='S5'?'“Sáng mai” chưa xác định được mã chuyến.':'Khách nhắn: “Ừ đổi đi, hai mẹ con nhé.” Cần chọn đúng một chuyến trước khi giữ chỗ.'}`;content.append(h);
+        if(state.scenario==='S4'){const blocked=button('BM 217 · 12/11 · 21:00 · còn 1 chỗ — không đủ cho hai người',()=>{},'flight');blocked.disabled=true;content.append(blocked)}
+        flights.filter(f=>f.id!==state.unavailableFlight).forEach(f=>{const b=button(`${f.id} · ${f.time} · còn ${f.seats} chỗ`,()=>selectFlight(f.id),'flight');content.append(b)});
         const correction=document.createElement('p');correction.className='muted';correction.innerHTML='<span class="marker">3</span>Sau khi chọn chuyến, bạn có thể đổi lựa chọn hoặc huỷ giữ chỗ trước khi xác nhận đổi vé.';content.append(correction);
         actions.append(button('Chuyển nhân viên',transfer));
       }else if(state.step==='hold'){
@@ -92,7 +130,7 @@
         decision.innerHTML='<span class="marker">1</span>Bạn đã chọn chuyến bên dưới cho cả hai hành khách. Vé chỉ đổi sau khi bạn xác nhận.';
         content.innerHTML=`<div class="notice"><span class="marker">3</span>Giữ chỗ còn <strong id="remaining">20:00</strong>. Có thể huỷ giữ hoặc đổi lựa chọn trước khi xác nhận. Nếu chuyển nhân viên, chỗ giữ sẽ được nhả.</div><div class="row"><span>Chuyến mới</span><strong>${state.selected.id} · ${state.selected.time}</strong></div><div class="row"><span>Hành khách</span><strong>Nguyễn Minh An và Nguyễn Gia Bình</strong></div><div class="alert">Xác nhận sẽ dùng lần đổi miễn phí duy nhất. Đổi nhầm có thể khó khôi phục.</div>`;
         content.prepend(decision);
-        actions.append(button('Xác nhận đổi cho cả hai',confirmChange,'primary'),button('Đổi lựa chọn',reset),button('Huỷ giữ chỗ',reset),button('Chuyển nhân viên',transfer),button('Giả lập hết hạn',()=>{state.deadline=null;setStep('expired')}));
+        actions.append(button('Xác nhận đổi cho cả hai',confirmChange,'primary'),button('Đổi lựa chọn',reset),button('Huỷ giữ chỗ',reset),button('Chuyển nhân viên',transfer),button('Giả lập hết hạn',()=>{state.deadline=null;setStep('expired')}),button('Giả lập chuyến vừa hết chỗ',simulateSeatLoss));
       }else if(state.step==='expired'){
         el('status').textContent='Giữ chỗ hết hạn';el('message').textContent='Giữ chỗ 20 phút đã hết hạn. Chưa có lệnh đổi vé. Vui lòng chọn lại chuyến để kiểm tra số chỗ hiện tại.';
         actions.append(button('Chọn lại chuyến',reset,'primary'),button('Chuyển nhân viên',transfer));
@@ -100,7 +138,7 @@
         el('main-title').textContent=`Đã đổi sang ${state.confirmedFlight.id}`;
         el('status').textContent='Đã xác nhận đổi · Mô phỏng';el('message').textContent=`Bạn đã xác nhận đổi sang ${state.selected.id} cho cả Nguyễn Minh An và Nguyễn Gia Bình. Lần đổi miễn phí đã được sử dụng trong mô phỏng.`;
         content.innerHTML='<div class="alert">Nếu thông tin vừa xác nhận không đúng, không thể tự khôi phục lần đổi miễn phí. Chuyển nhân viên ngay để kiểm tra phương án còn lại.</div>';
-        actions.append(button('Báo đổi nhầm · Chuyển nhân viên',transfer,'primary'),button('Làm lại ca demo',reset));
+        actions.append(button('Báo đổi nhầm · Chuyển nhân viên',transfer,'primary'),button('Làm lại ca demo',()=>chooseScenario(state.scenario)));
       }else{
         el('status').textContent='Đã chuyển nhân viên · Mô phỏng';el('message').textContent='Đã tạo phiếu hỗ trợ cho đặt chỗ TRV-7Q2K. Chưa có thời gian xử lý được xác nhận.';
         const context=document.createElement('div');context.className='notice';context.id='handoff-context';
@@ -111,13 +149,15 @@
           selected.textContent=`Chuyến liên quan: ${state.selected.id} · ${state.selected.time}. Phiếu hỗ trợ không giữ chỗ.`;
           content.append(selected);
         }
-        actions.append(button('Làm lại ca demo',reset));
+        if(quickCases[state.scenario]){const detail=document.createElement('p');detail.textContent=`Lý do chuyển: ${quickCases[state.scenario].title}. ${quickCases[state.scenario].evidence}`;content.append(detail)}
+        actions.append(button('Làm lại ca demo',()=>chooseScenario(state.scenario)));
       }
     }
-    el('tab-change').onclick=()=>{if(state.case!=='change'){state.case='change';reset()}};
-    el('tab-refund').onclick=()=>{if(state.case!=='refund'){state.case='refund';state.selected=null;state.deadline=null;state.confirmedFlight=null;state.transferReason=null;setStep('refund')}};
+    el('scenario').onchange=e=>chooseScenario(e.target.value);
+    el('tab-change').onclick=()=>chooseScenario('S1');
+    el('tab-refund').onclick=()=>chooseScenario('S2');
     setInterval(()=>{if(state.case!=='change'||state.step!=='hold')return;const seconds=Math.max(0,Math.ceil((state.deadline-Date.now())/1000));if(seconds===0){setStep('expired');return}el('remaining').textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`},1000);
-    if(location.hash==='#refund'){state.case='refund';state.step='refund'}
+    if(location.hash==='#refund'){state.case='refund';state.scenario='S2';state.step='refund'}
     render();
   </script>
 </body>
