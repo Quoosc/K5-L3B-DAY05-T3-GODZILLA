@@ -15,7 +15,7 @@ Bài thiết kế và prototype cho tính năng **Đặt chỗ của tôi** khi 
 1. Mở `prototype/index.html` trực tiếp bằng trình duyệt. Ca mặc định là **S1**: khách đã nói “Ừ đổi đi, hai mẹ con nhé” nhưng chưa chọn chuyến cụ thể.
 2. Bấm **Chọn và giữ BM 201**. Kiểm tra mã chuyến, hai hành khách, bộ đếm 20 phút và cảnh báo về lần đổi miễn phí. Thử **Chọn chuyến khác (nhả chỗ đang giữ)** hoặc **Huỷ giữ chỗ, chưa đổi vé**. Nút **Giả lập hết 20 phút giữ chỗ** cho thấy quyền xác nhận biến mất.
 3. Chọn lại chuyến rồi bấm **Xác nhận đổi vé sang BM 201 cho cả hai**. Bấm **Báo đổi nhầm BM 201 cho nhân viên** để xem phiếu ghi chuyến đã đổi và lần miễn phí đã dùng. Cột quyền lợi cũng được cập nhật.
-4. Bấm **S2 · Hoàn đã gửi**. Kiểm tra cảnh báo không thể huỷ yêu cầu hoàn, rồi bấm **Chuyển nhân viên kiểm tra yêu cầu hoàn** để xem phiếu có mã đặt chỗ và trạng thái yêu cầu.
+4. Bấm **S2 · Hoàn đã gửi**. Bước đầu cho biết yêu cầu hoàn **đã gửi lúc 15:10**; đây không phải nút gửi hoàn mới. Bấm **Mô phỏng khách hỏi: huỷ hoàn để đổi chuyến** để xem nguyên văn tin khách, lời AI và các hành động bị chặn. Sau đó bấm **Chuyển nhân viên kiểm tra yêu cầu hoàn** để xem phiếu có mã đặt chỗ, hai hành khách, trạng thái hoàn và nội dung cần xác minh.
 
 **Thử thêm trong cùng giao diện:** dùng mục **Tình huống demo** để chọn S3–S11. S4 cho thấy nút **Không thể giữ BM 217** bị khoá vì chỉ còn một chỗ. Sau khi giữ BM 201, bấm **Giả lập BM 201 vừa hết chỗ** để xem trợ lý huỷ xác nhận cũ và yêu cầu chọn lại. S6/S8/S9 có nút chuyển nhân viên nêu rõ lý do; S10 không bỏ qua xác nhận; S11 có nút báo đổi nhầm BM 205. Các nhánh dùng dữ liệu và lời thoại dựng sẵn, không nhận câu hỏi tự do.
 

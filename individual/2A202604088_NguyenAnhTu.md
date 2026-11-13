@@ -9,7 +9,7 @@
 Prototype và hai ảnh đã có. Đọc [spec.md §5–§6](../spec.md) và [hướng dẫn luyện demo](../README.md), rồi mở [prototype](../prototype/index.html) bằng trình duyệt để chạy lại theo thứ tự trình bày.
 
 1. Ở **S1**, chỉ [1] hỏi lại vì khách chưa chọn chuyến và [2] BM 217 chỉ còn một chỗ. Bấm **Chọn và giữ BM 201** rồi chỉ [3] giữ tạm, nút huỷ và nút xác nhận. Bấm **Huỷ giữ chỗ, chưa đổi vé** hoặc **Giả lập hết 20 phút giữ chỗ** để kiểm tra nút xác nhận biến mất. Chọn lại và xác nhận cho cả hai. [Ảnh S1](../prototype/01-clarify.png)
-2. Mở **S2 · Hoàn đã gửi**. Chỉ [4] cảnh báo không thể huỷ yêu cầu hoàn đã gửi. Bấm **Chuyển nhân viên kiểm tra yêu cầu hoàn** và kiểm tra mã đặt chỗ cùng trạng thái hoàn trong phiếu. [Ảnh S2](../prototype/02-refund.png)
+2. Mở **S2 · Hoàn đã gửi**. Chỉ trạng thái đã gửi lúc 15:10, rồi bấm **Mô phỏng khách hỏi: huỷ hoàn để đổi chuyến**. Chỉ [4] lời AI, hành động không được làm và đường hỗ trợ. Bấm **Chuyển nhân viên kiểm tra yêu cầu hoàn**; chỉ mã đặt chỗ, hai hành khách, trạng thái hoàn và việc nhân viên cần kiểm tra trong phiếu. [Ảnh S2](../prototype/02-refund.png)
 3. Trình bày kết quả **P1–P3** ở §6; chỉ quyền lợi sau đổi và sự khác nhau của phiếu chuyển trước/sau đổi để chứng minh prototype làm đúng chính sách năm tool.
 
 **Ý chính để trình bày:** cho người xem thấy khác biệt giữa chọn chuyến, giữ chỗ tạm và xác nhận đổi. Nếu ca lạ nằm ngoài hai màn hình đã dựng, giải thích trợ lý được làm gì theo §4 và bước tiếp theo mà khách sẽ thấy.

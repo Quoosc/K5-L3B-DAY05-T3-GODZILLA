@@ -59,7 +59,7 @@ Tôi cân nhắc cho AI tự chọn chuyến để nhanh hơn, nhưng cách đó
 
 Tool `gui_yeu_cau_hoan_ve` **không đảo được** theo đề. Tôi không đặt nút “Huỷ hoàn” hoặc “Đổi vé” trong trạng thái này. Trợ lý nói rằng yêu cầu đã gửi, không thể huỷ sau khi gửi và chưa thể bảo đảm vé còn đổi được. **[4]** cho thấy trạng thái, hậu quả và nút chuyển nhân viên. Khi khách bấm chuyển, prototype hiện phiếu hỗ trợ mô phỏng với mã đặt chỗ, trạng thái hoàn và nội dung cần kiểm tra. Tôi không hứa thời gian phản hồi của nhân viên vì fixture không cung cấp. [Ảnh S2](../prototype/02-refund.png)
 
-Tôi cân nhắc hỏi lại để thử huỷ hoàn, nhưng không có tool cho thao tác đó. Tôi loại lời hứa “vé vẫn đổi được” vì không có dữ liệu trạng thái xử lý. Trong S2 gốc, chưa có bằng chứng AI đã tư vấn sai. Chỉ biến thể AI từng nói yêu cầu hoàn có thể rút mới là **lỗi hệ thống** và cần nhận lỗi rõ ràng. Sửa câu chữ chỉ giải quyết lời thông báo; sản phẩm còn phải khóa các hành động vượt quyền và chuyển ca cùng ngữ cảnh cho nhân viên.
+Tôi cân nhắc hỏi lại để thử huỷ hoàn, nhưng không có tool cho thao tác đó. Tôi loại lời hứa “vé vẫn đổi được” vì không có dữ liệu trạng thái xử lý. Trong S2 gốc, chưa có bằng chứng AI đã tư vấn sai. Chỉ biến thể AI từng nói yêu cầu hoàn có thể rút mới là **lỗi hệ thống** và cần nhận lỗi rõ ràng. Sửa câu chữ chỉ giải quyết lời thông báo; sản phẩm còn phải khóa các hành động vượt quyền và chuyển ca cùng ngữ cảnh cho nhân viên. Để demo không nhảy thẳng tới kết luận, tôi tách S2 thành ba bước: trạng thái hoàn đã gửi, tin khách muốn đổi chuyến cùng lời AI, rồi phiếu nhân viên nhận. Không có nút gửi hoàn lần nữa hoặc nút tự huỷ yêu cầu cũ.
 
 ## 5. Lập luận mức tự chủ theo cái giá khi sai
 

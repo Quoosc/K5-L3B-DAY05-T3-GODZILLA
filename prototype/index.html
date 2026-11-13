@@ -71,7 +71,7 @@
       if(!/^S(?:[1-9]|10|11)$/.test(id))return;
       state.scenario=id;state.case=id==='S2'?'refund':'change';
       state.selected=null;state.deadline=null;state.confirmedFlight=null;state.transferReason=null;state.unavailableFlight=null;
-      state.step=id==='S2'?'refund':id==='S11'?'done':'clarify';
+      state.step=id==='S2'?'refund-intro':id==='S11'?'done':'clarify';
       if(id==='S11'){state.selected=flights[1];state.confirmedFlight={...flights[1]}}
       render();
     }
@@ -100,11 +100,21 @@
       el('booking-policy').textContent=refund?'Cần xác minh sau khi đã gửi yêu cầu hoàn':state.confirmedFlight?'Đã sử dụng lần đổi miễn phí. Các thay đổi tiếp theo cần nhân viên kiểm tra.':'Đổi miễn phí 1 lần trong 48 giờ hoặc hoàn toàn bộ';
       const content=el('main-content'),actions=el('actions');content.replaceChildren();actions.replaceChildren();
       if(refund){
-        el('main-title').textContent='Yêu cầu hoàn đã gửi';el('status').textContent=state.step==='transfer'?'Đã chuyển nhân viên · Mô phỏng':'Không thể huỷ yêu cầu hoàn';el('status').className='status red';
-        el('message').textContent=state.step==='transfer'?'Đã tạo phiếu hỗ trợ cho đặt chỗ TRV-7Q2K. Yêu cầu hoàn vẫn ở trạng thái đã gửi.':'Yêu cầu hoàn của đặt chỗ TRV-7Q2K đã được gửi và không thể huỷ. Mình chưa có thông tin xác nhận vé còn đổi được. Bấm “Chuyển nhân viên kiểm tra yêu cầu hoàn” để xem tình trạng vé và các phương án còn lại. Bạn không cần gửi thêm yêu cầu hoàn.';
-        content.innerHTML='<div class="alert"><span class="marker">4</span>Yêu cầu hoàn đã gửi lúc 15:10 ngày 12/11. Gửi rồi không huỷ được. Nhân viên sẽ kiểm tra trạng thái xử lý, không huỷ yêu cầu đã gửi.</div>';
-        if(state.step==='transfer'){content.innerHTML+='<div class="notice">Đã tạo phiếu hỗ trợ mô phỏng. Nhân viên nhận mã TRV-7Q2K, trạng thái hoàn đã gửi và yêu cầu kiểm tra khả năng đổi chuyến. Chưa có thời gian xử lý được xác nhận.</div>'}
-        else actions.append(button('Chuyển nhân viên kiểm tra yêu cầu hoàn',transfer,'primary'));
+        const intro=state.step==='refund-intro',sent=state.step==='transfer';
+        el('main-title').textContent=intro?'S2 · Khách đã gửi yêu cầu hoàn':sent?'S2 · Đã chuyển nhân viên':'S2 · Không thể huỷ yêu cầu hoàn';
+        el('status').textContent=sent?'Đã tạo phiếu hỗ trợ · Mô phỏng':intro?'Yêu cầu hoàn đã gửi lúc 15:10':'Không thể huỷ yêu cầu đã gửi';el('status').className='status red';
+        el('message').textContent=intro?'Khách đã gửi yêu cầu hoàn cho đặt chỗ TRV-7Q2K. Yêu cầu này không thể huỷ. Hãy xem trợ lý phản hồi khi khách muốn chuyển sang đổi chuyến.':sent?'Đã chuyển yêu cầu kiểm tra tới nhân viên. Yêu cầu hoàn vẫn ở trạng thái đã gửi; chưa có kết luận về khả năng đổi vé.':'Yêu cầu hoàn của đặt chỗ TRV-7Q2K đã được gửi và không thể huỷ. Mình chưa có thông tin xác nhận vé còn đổi được. Bấm “Chuyển nhân viên kiểm tra yêu cầu hoàn” để xem tình trạng vé và các phương án còn lại. Bạn không cần gửi thêm yêu cầu hoàn.';
+        content.innerHTML='<div class="notice"><strong>Bước 1 · Trạng thái đã có</strong><br>TRV-7Q2K · Nguyễn Minh An và Nguyễn Gia Bình · yêu cầu hoàn đã gửi lúc 15:10 ngày 12/11. Không thể huỷ sau khi gửi.</div>';
+        if(intro){
+          content.innerHTML+='<div class="alert"><strong>Bước 2 · Khách muốn hỏi tiếp</strong><br>“Tôi bấm gửi hoàn rồi, huỷ hoàn đi để đổi chuyến.”</div>';
+          actions.append(button('Mô phỏng khách hỏi: huỷ hoàn để đổi chuyến',()=>setStep('refund-request'),'primary'));
+        }else if(!sent){
+          content.innerHTML+='<div class="notice"><strong>Bước 2 · Tin khách</strong><br>“Tôi bấm gửi hoàn rồi, huỷ hoàn đi để đổi chuyến.”</div><div class="alert"><span class="marker">4</span><strong>Trợ lý không được làm:</strong> huỷ yêu cầu hoàn đã gửi, tự đổi vé hoặc hứa vé còn đổi được.<br><strong>Việc tiếp theo:</strong> chuyển nhân viên kiểm tra trạng thái vé và lựa chọn còn lại.</div>';
+          actions.append(button('Chuyển nhân viên kiểm tra yêu cầu hoàn',transfer,'primary'));
+        }else{
+          content.innerHTML+='<div class="alert"><span class="marker">4</span>Yêu cầu hoàn chưa được huỷ; trợ lý không đổi vé hay gửi yêu cầu hoàn lần nữa.</div><div class="notice"><strong>Bước 3 · Thông tin nhân viên nhận trong mô phỏng</strong><br>Mã TRV-7Q2K · Nguyễn Minh An, Nguyễn Gia Bình · yêu cầu hoàn đã gửi lúc 15:10 · khách muốn đổi chuyến · cần xác minh trạng thái vé và phương án còn lại. Chưa có thời gian phản hồi được xác nhận.</div>';
+          actions.append(button('Làm lại tình huống S2',()=>chooseScenario('S2')));
+        }
         return;
       }
       if(quickCases[state.scenario] && state.step!=='transfer'){
@@ -158,7 +168,7 @@
     el('tab-change').onclick=()=>chooseScenario('S1');
     el('tab-refund').onclick=()=>chooseScenario('S2');
     setInterval(()=>{if(state.case!=='change'||state.step!=='hold')return;const seconds=Math.max(0,Math.ceil((state.deadline-Date.now())/1000));if(seconds===0){setStep('expired');return}el('remaining').textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`},1000);
-    if(location.hash==='#refund'){state.case='refund';state.scenario='S2';state.step='refund'}
+    if(location.hash==='#refund'){state.case='refund';state.scenario='S2';state.step='refund-intro'}
     render();
   </script>
 </body>
